@@ -1,0 +1,348 @@
+.ie .xe-tree .xe-tree-bwrap{
+    /*position:relative;
+    overflow:hidden;
+   */
+}
+.xe-tree ul,.xe-tree li
+{
+    list-style-type:none;
+    margin:0px;
+    padding:0px;
+}
+.xe-tree-body
+{
+     font-size:13px;
+}
+.xe-tree-icon, .xe-tree-ec-icon, .xe-tree-node-cb,.xe-tree-elbow-line, .xe-tree-elbow, .xe-tree-elbow-end, .xe-tree-elbow-plus, .xe-tree-elbow-minus, .xe-tree-elbow-end-plus, .xe-tree-elbow-end-minus{
+	border: 0 none;
+	height: 18px;
+	margin: 0;
+	padding: 0;
+	vertical-align: top;
+	width: 16px;
+    background-repeat: no-repeat;
+}
+ .xe-tree-node-cb
+ {
+     height:16px;
+ }
+.xe-tree-node-collapsed .xe-tree-node-icon, .xe-tree-node-expanded .xe-tree-node-icon, .xe-tree-node-leaf .xe-tree-node-icon{
+	border: 0 none;
+	height: 18px;
+	margin: 0;
+	padding: 0;
+	vertical-align: top;
+	width: 16px;
+	background-position:center;
+    background-repeat: no-repeat;
+}
+
+.ie .xe-tree-node-indent img, .ie .xe-tree-node-icon, .ie .xe-tree-ec-icon {
+    vertical-align:middle !important;
+}
+
+.xe-tree-noicon .xe-tree-node-icon{
+	width:0; height:0;
+}
+
+/* No line styles */
+.xe-tree-no-lines .xe-tree-elbow{
+	background:transparent;
+}
+
+.xe-tree-no-lines .xe-tree-elbow-end{
+	background:transparent;
+}
+
+.xe-tree-no-lines .xe-tree-elbow-line{
+	background:transparent;
+}
+
+/* Arrows */
+.xe-tree-arrows .xe-tree-elbow{
+	background:transparent;
+	width: 5px;
+}
+
+.xe-tree-arrows .xe-tree-elbow-plus{
+    background:transparent no-repeat 0 0;
+}
+
+.xe-tree-arrows .xe-tree-elbow-minus{
+    background:transparent no-repeat -16px 0;
+}
+
+.xe-tree-arrows .xe-tree-elbow-end{
+	background:transparent;
+	width: 5px;
+}
+
+.xe-tree-arrows .xe-tree-elbow-end-plus{
+    background:transparent no-repeat 0 0;
+}
+
+.xe-tree-arrows .xe-tree-elbow-end-minus{
+    background:transparent no-repeat -16px 0;
+}
+
+.xe-tree-arrows .xe-tree-elbow-line{
+	background:transparent;
+}
+
+.xe-tree-arrows .xe-tree-ec-over .xe-tree-elbow-plus{
+    background-position:-32px 0;
+}
+
+.xe-tree-arrows .xe-tree-ec-over .xe-tree-elbow-minus{
+    background-position:-48px 0;
+}
+
+.xe-tree-arrows .xe-tree-ec-over .xe-tree-elbow-end-plus{
+    background-position:-32px 0;
+}
+
+.xe-tree-arrows .xe-tree-ec-over .xe-tree-elbow-end-minus{
+    background-position:-48px 0;
+}
+
+/*****************arrow newico*********************/
+/* Arrows */
+.xe-tree-arrows-newico .xe-tree-ec-over .xe-tree-elbow-plus{
+    background-position:0px -12px;
+}
+
+.xe-tree-arrows-newico .xe-tree-ec-over .xe-tree-elbow-minus{
+    
+    background-position:0px 0px;
+}
+
+.xe-tree-arrows-newico .xe-tree-ec-over .xe-tree-elbow-end-plus{
+    background-position:0px -12px;
+}
+
+.xe-tree-arrows-newico.xe-tree-ec-over .xe-tree-elbow-end-minus{
+    background-position:0px 0px;
+}
+/**************end arrow2**************/
+
+
+.xe-tree-elbow-plus, .xe-tree-elbow-minus, .xe-tree-elbow-end-plus, .xe-tree-elbow-end-minus{
+	cursor:pointer;
+}
+
+.ie ul.xe-tree-node-ct{
+    font-size:0;
+    line-height:0;
+    zoom:1;
+}
+
+.xe-tree-node{
+	white-space: nowrap;
+}
+
+.xe-tree-node-el {
+    line-height:18px;
+    cursor:default;
+   /* cursor:pointer;*/
+}
+
+.xe-tree-node a{
+	text-decoration:none;
+	-khtml-user-select:none;
+	-moz-user-select:none;
+    -webkit-user-select:ignore;
+    -kthml-user-focus:normal;
+    -moz-user-focus:normal;
+    -moz-outline: 0 none;
+    outline:0 none;
+}
+
+.xe-tree-node a span{
+	text-decoration:none;
+	padding:1px 3px 1px 2px;
+}
+
+.xe-tree-node .xe-tree-node-disabled .xe-tree-node-icon{
+   -moz-opacity: 0.5;
+   opacity:.5;
+   filter: alpha(opacity=50);
+}
+
+.xe-tree-node .xe-tree-node-inline-icon{
+	background:transparent;
+}
+
+.xe-tree-node a:hover{
+	text-decoration:none;
+}
+
+
+
+/* Fix for ie rootVisible:false issue */
+.xe-tree-root {
+    zoom:1;
+}
+
+
+/****************************/
+.xe-tree-node-expanded .xe-tree-node-icon{
+	background-image:url(../../img//plugin/tree/folder-open.gif);
+}
+
+.xe-tree-node-leaf .xe-tree-node-icon{
+	background-image:url(../../img//plugin/tree/leaf.png);
+}
+
+.xe-tree-node-collapsed .xe-tree-node-icon{
+	background-image:url(../../img//plugin/tree/folder.gif);
+}
+
+.xe-tree-node-group  .xe-tree-node-icon{
+	background-image:url(../../img//plugin/tree/group.gif);
+}
+
+.menutree .xe-tree-node-expanded .xe-tree-node-icon{
+	background-image:url(../../img//plugin/tree/mfolder-open.gif);
+}
+
+.menutree .xe-tree-node-collapsed .xe-tree-node-icon{
+	background-image:url(../../img//plugin/tree/mfolder.gif);
+}
+
+
+.xe-tree-node-loading .xe-tree-node-icon{
+	background-image:url(../../img//plugin/tree/loading.gif) !important;
+}
+
+.xe-tree-node .xe-tree-node-inline-icon {
+    background-image: none;
+}
+
+.xe-tree-node-loading a span{
+	 font-style: italic;
+	 color:#444444;
+}
+.xe-tree-lines .xe-tree-icon
+{
+    background-image:url(../../img//plugin/tree/elbow-line.gif);
+}
+.xe-tree-lines .xe-tree-elbow{
+	background-image:url(../../img//plugin/tree/elbow.gif);
+}
+
+.xe-tree-lines .xe-tree-elbow-plus{
+	background-image:url(../../img//plugin/tree/elbow-plus.gif);
+}
+
+.xe-tree-lines .xe-tree-elbow-minus{
+	background-image:url(../../img//plugin/tree/elbow-minus.gif);
+}
+
+.xe-tree-lines .xe-tree-elbow-end{
+	background-image:url(../../img//plugin/tree/elbow-end.gif);
+}
+
+.xe-tree-lines .xe-tree-elbow-end-plus{
+	background-image:url(../../img//plugin/tree/elbow-end-plus.gif);
+}
+
+.xe-tree-lines .xe-tree-elbow-end-minus{
+	background-image:url(../../img//plugin/tree/elbow-end-minus.gif);
+}
+
+.xe-tree-lines .xe-tree-elbow-line{
+	background-image:url(../../img//plugin/tree/elbow-line.gif);
+}
+
+.xe-tree-no-lines .xe-tree-elbow-plus{
+	background-image:url(../../img//plugin/tree/elbow-plus-nl.gif);
+}
+
+.xe-tree-no-lines .xe-tree-elbow-minus{
+	background-image:url(../../img//plugin/tree/elbow-minus-nl.gif);
+}
+
+.xe-tree-no-lines .xe-tree-elbow-end-plus{
+	background-image:url(../../img//plugin/tree/elbow-end-plus-nl.gif);
+}
+
+.xe-tree-no-lines .xe-tree-elbow-end-minus{
+	background-image:url(../../img//plugin/tree/elbow-end-minus-nl.gif);
+}
+
+.xe-tree-arrows .xe-tree-elbow-plus{
+    background-image:url(../../img//plugin/tree/arrows.gif);
+}
+
+.xe-tree-arrows .xe-tree-elbow-minus{
+    background-image:url(../../img//plugin/tree/arrows.gif);
+}
+
+.xe-tree-arrows .xe-tree-elbow-end-plus{
+    background-image:url(../../img//plugin/tree/arrows.gif);
+}
+
+.xe-tree-arrows .xe-tree-elbow-end-minus{
+    background-image:url(../../img//plugin/tree/arrows.gif);
+}
+
+
+.xe-tree-arrows-newico .xe-tree-elbow-plus{
+	margin-top: 2px;
+	height: 14px;	
+	width: 14px;
+    background-image:url(../../img//plugin/tree/arrows.png);
+    background-position:-12px -12px;   
+}
+
+.xe-tree-arrows-newico .xe-tree-elbow-minus{
+	height: 14px;	
+	width: 14px;
+	margin-top: 2px;
+    background-image:url(../../img//plugin/tree/arrows.png);
+    background-position:-12px 0px;
+}
+
+.xe-tree-arrows-newico .xe-tree-elbow-end-plus{
+	height: 14px;	
+	width: 14px;
+	margin-top: 2px;
+    background-image:url(../../img//plugin/tree/arrows.png);
+    background-position:-12px -12px;   
+}
+
+.xe-tree-arrows-newico .xe-tree-elbow-end-minus{
+	height: 12px;	
+	width: 14px;
+	margin-top: 2px;
+    background-image:url(../../img//plugin/tree/arrows.png);
+    background-position:-12px 0px;
+}
+
+.xe-tree-node{
+	color:#000;	
+}
+
+.xe-tree-node a{
+	color:#000;
+}
+.xe-tree-node a span{
+	color:#000;
+}
+.xe-tree-node .xe-tree-node-disabled a span{
+	color:gray !important;
+}
+.xe-tree-node .xe-tree-node-over {
+	background-color: #eee;
+}
+
+.xe-tree-node .xe-tree-selected {
+	background-color: #d9e8fb;
+}
+
+.xe-tree
+{
+	margin:0px;
+	padding:0px;
+}
+
