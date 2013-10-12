@@ -5,7 +5,7 @@
 
 var express = require('express');
 var routes = require('./routes');
-var user = require('./routes/user');
+var sample = require('./routes/sample');
 var http = require('http');
 var path = require('path');
 
@@ -28,11 +28,42 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-app.get('/index', routes.index);
-app.get('/xjtree', routes.xjtree);
-app.get('/sample', routes.sample);
-app.get('/download', routes.download);
-app.get('/api', routes.api);
+
+app.get('/:action',function(req, res, next){
+	  if(routes[req.params.action])
+	  {
+	    routes[req.params.action](req, res, next);
+	  }
+	  else
+	  {
+	    res.status(404);
+	    res.end();
+	  }
+});
+app.get('/sample/:action', function(req, res, next){	
+	if(sample[req.params.action])
+	{
+	   sample[req.params.action](req, res, next);
+	}
+	else
+	{
+	   res.status(404);
+	   res.end();
+	}
+});
+app.post('/sample/:action', function(req, res, next){
+	var postAction = "do" + req.params.action;
+	if(sample[postAction])
+	{
+	   sample[postAction](req, res, next);
+	}
+	else
+	{
+	   res.status(404);
+	   res.end();
+	}
+});
+
 
 
 http.createServer(app).listen(app.get('port'), function(){

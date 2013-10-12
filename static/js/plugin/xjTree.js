@@ -17,18 +17,17 @@
         method: "POST",
         datatype: "json",
         url: false,
-        cbiconpath: "img/icon/",
+        cbiconpath: "/img/icon/",
         icons: ["checkbox_0.gif", "checkbox_1.gif", "checkbox_2.gif"],
-        emptyiconpath: "img/icon/s.gif",
+        emptyiconpath: "/img/icon/s.gif",
         showcheck: false, //是否显示选择            
         oncheckboxclick: false, //当checkstate状态变化时所触发的事件，但是不会触发因级联选择而引起的变化
         onnodeclick: false,
         parsedata: false,
         cascadecheck: true,
         data: null,
-        preloadcomplete: false,
-        clicktoggle: true, //点击节点展开和收缩子节点
-        theme: "xe-tree-arrows" //xe-tree-line
+        preloadcomplete: false,      
+        theme: "xe-tree-arrows" //xe-tree-line,xe-tree-no-lines,xe-tree-arrows-newico
     };
     function xjTree(id,options){
     	var self = this;
@@ -39,13 +38,13 @@
             alert("错误的ID："+id);
             return;
         }
-        this.options = $.extend(defaults, options);
+        this.options = $.extend({},defaults,options);
         this.treedata = this.options.data;
      
         var html = [];
         __BuildTreeRoot__(this.treeid,this.treedata,html,this.options); //构建HTML
       
-        console.info(html.length);
+        //console.info(html.length);
         this.el.addClass('xe-tree').html(html.join(""));
        
      	__BindEvent__(this.treeid,this.el,this.options);
@@ -127,7 +126,7 @@
                 if (nd.checkstate == null || nd.checkstate == undefined) {
                     nd.checkstate = 0;
                 }
-                ht.push("<img  id='", id, "_", nid, "_cb' class='xe-tree-node-cb' src='", options.cbiconpath, options.icons[nd.checkstate], "'/>");
+                ht.push("<img  id='", treeid, "_", nid, "_cb' class='xe-tree-node-cb' src='", options.cbiconpath, options.icons[nd.checkstate], "'/>");
             }
             //a
             ht.push("<a hideFocus class='xe-tree-node-anchor' tabIndex=1 href='javascript:void(0);'>");
@@ -198,7 +197,7 @@
                     }
                     else {
                         $(nodeElement).addClass("xe-tree-node-loading");
-                        __AsnyLoadc__(item, true, function(data) {
+                        __AsnyLoad__(item, true, options,function(data) {
                             options.parsedata && options.parsedata(data);
                             item.complete = true;
                             item.ChildNodes = data;
@@ -223,7 +222,26 @@
                     $(et).swapClass("xe-tree-elbow-end-minus", "xe-tree-elbow-end-plus");
                 }
                 $(this).swapClass("xe-tree-node-expanded", "xe-tree-node-collapsed");
-            }               
+            }
+            else if($(et).hasClass("xe-tree-node-cb")) // 点击了Checkbox
+            {
+                var s = item.checkstate != 1 ? 1 : 0;
+                var r = true;
+                if (options.oncheckboxclick) {
+                    r = options.oncheckboxclick.call(et, item, s);
+                }
+                if (r != false) {
+                    if (options.cascadecheck) {
+                        //遍历
+                        __Cascade__(__Check__, treeid,item, s , options);
+                        //上溯
+                        __Bubble__(__Check__,treeid, item, s,options);
+                    }
+                    else {
+                        __Check__(treeid,item, s, 1 , options);
+                    }
+                }
+            }       
         }
         else {
             if (options.citem) {
@@ -272,13 +290,13 @@
             }
             ul.html(ht.join(""));
             ht = null;
-            __BindEvent__(ul);
+            __BindEvent__(treeid,ul,options);
         }           
         ul.addClass("xe-tree-node-ct").css({ "z-index": 0, position: "static", visibility: "visible", top: "auto", left: "auto", display: "" });
         ul.prev().removeClass("xe-tree-node-loading");
     }
-    function __AsnyLoadc__(pnode,isAsync,options,callback){
-	   if (options.url) {
+    function __AsnyLoad__(pnode,isAsync,options,callback){
+	    if (options.url) {
             var param;
             if (pnode && pnode != null) {
                 param =__BuilParam__(pnode);
@@ -309,5 +327,97 @@
                 , { name: "checkstate", value: node.checkstate}];
         return p;
     }
+    function __Check__(treeid,item, state, type,options){
+        var pstate = item.checkstate;
+        if (type == 1) {
+           item.checkstate = state;
+        }
+        else {// 上溯
+            var cs = item.ChildNodes;
+            var l = cs.length;
+            var ch = true;
+            for (var i = 0; i < l; i++) {
+                if ((state == 1 && cs[i].checkstate != 1) || state == 0 && cs[i].checkstate != 0) {
+                    ch = false;
+                    break;
+                }
+            }
+            if (ch) {
+                item.checkstate = state;
+            }
+            else {
+                item.checkstate = 2;
+            }
+        }
+        //change show
+        if (item.render && pstate != item.checkstate) {
+            var nid = item.id.replace(/[^\w]/gi, "_");
+            var et = $("#" + treeid + "_" + nid + "_cb");
+            if (et.length == 1) {
+                et.attr("src", options.cbiconpath + options.icons[item.checkstate]);
+            }
+        }
+    }
+    function __Cascade__(fn,treeid, item, args,options){
+        if (fn(treeid,item, args, 1,options) != false) { // istrue ==break终止遍历
+            if (item.ChildNodes != null && item.ChildNodes.length > 0) {
+                var cs = item.ChildNodes;
+                for (var i = 0, len = cs.length; i < len; i++) {
+                    __Cascade__(fn,treeid, cs[i], args,options);
+                }
+            }
+        }
+    }
+    function __Bubble__(fn, treeid,item, args,options){
+        var p = item.parent;
+        while (p) {
+            if (fn(treeid,p, args, 0,options) === false) {
+                break;
+            }
+            p = p.parent;
+        }
+    }
+
+    function __GetCk__(items , c , halfCheck , fn){
+        for (var i = 0, l = items.length; i < l; i++) {
+            (items[i].showcheck == true && (items[i].checkstate == 1 || ( halfCheck && items[i].checkstate == 2)) ) && c.push(fn(items[i]));
+            if (items[i].ChildNodes != null && items[i].ChildNodes.length > 0) {
+                __GetCk__(items[i].ChildNodes, c,halfCheck, fn);
+            }
+        }
+    }
+    xjTree.prototype ={
+        GetCheckedItems:function(gethalfchecknode){ //获取选中的项 包含所有的节点数据
+            var s = [];
+            __GetCk__(this.treedata, s,gethalfchecknode, function(item) { return item; });            
+            return s;
+        },
+        GetCheckedValues:function(gethalfchecknode){ //获取选中的项的Values
+            var s = [];
+            __GetCk__(treenodes, s, gethalfchecknode,function(item) { return item.value; });
+            return s;
+        },
+        GetCurrentItem:function(){ //获取当前项
+
+        },
+        Refresh:function(itemOrItemId){ //刷新某节点
+
+        },
+        CheckAll:function(){ //选中全部
+
+        },
+        UnCheckAll:function(){ //反选全部
+
+        },
+        SetItemsCheckState:function(itemIds, ischecked, cascadecheck){ //设置某些节点的状态
+
+        },
+        ToggleNode:function(itemId){  //展开和关闭某节点
+
+        },
+        GetTreeData:function(){ //获取所有数据
+
+        }
+    };
     window.xjTree = xjTree;
 })(window,undefined,jQuery);

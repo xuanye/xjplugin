@@ -61,7 +61,7 @@
 /* Arrows */
 .xe-tree-arrows .xe-tree-elbow{
 	background:transparent;
-	width: 5px;
+	width: 16px;
 }
 
 .xe-tree-arrows .xe-tree-elbow-plus{
@@ -74,7 +74,7 @@
 
 .xe-tree-arrows .xe-tree-elbow-end{
 	background:transparent;
-	width: 5px;
+	width: 16px;
 }
 
 .xe-tree-arrows .xe-tree-elbow-end-plus{
