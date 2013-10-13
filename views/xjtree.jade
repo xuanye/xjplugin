@@ -49,7 +49,7 @@ block headercontent
 block content
 	h3 树控件（xjTree）使用样例
 	div
-		div.alert.alert-info 调用xjTree之前需要在页面上引入对应的样式和脚步，因为xjTree依赖jquery，所以你还需额外引入jquery
+		div.alert.alert-info 调用xjTree之前需要在页面上引入对应的样式和脚本，因为xjTree依赖jquery，所以你还需额外引入jquery
 		div.codep
 			code
 				|&lt;link rel="stylesheet" href="css/plugin/xjtree.css" type="text/css"&gt;
@@ -153,7 +153,8 @@ block content
 				code showcheck:true 
 				|，两处默认都为 
 				code false
-				| 。
+				| 。 xjTree 的 checkbox 是三个状态的 选中、半选中、非选中； 
+				| 其中半选中表示在级联选择模式下 其本身没有被选中，且子节点中有节点被选中，但并非全部的情况。
 			pre
 				code
 					|var treedata3=[
