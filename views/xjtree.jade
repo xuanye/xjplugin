@@ -49,7 +49,10 @@ block headercontent
 block content
 	h3 树控件（xjTree）使用样例
 	div
-		div.alert.alert-info 调用xjTree之前需要在页面上引入对应的样式和脚本，因为xjTree依赖jquery，所以你还需额外引入jquery
+		div.alert.alert-info 
+			| 调用xjTree之前需要在页面上引入对应的样式和脚本，因为xjTree依赖jquery，所以你还需额外引入jquery,
+			| xjTree支持动态加载数据和一次加载全部数据，性能非常优秀，
+			a(href="bigxjtree") 查看大数据示例
 		div.codep
 			code
 				|&lt;link rel="stylesheet" href="css/plugin/xjtree.css" type="text/css"&gt;
@@ -185,12 +188,12 @@ block content
 			div.toolbar.alert.alert-info
 				div.tip 操作
 				div
-					button.btn(type="button") 获取选中项
-					button.btn(type="button") 获取当前项
-					button.btn(type="button") 展开/收缩第二个节点
-					button.btn(type="button") 选中周润发
-					button.btn(type="button") 全选
-					button.btn(type="button") 全不选
+					button#btnGetCheckItems.btn(type="button") 获取选中项
+					button#btnGetCurItem.btn(type="button") 获取当前项
+					button#btnToggleNode.btn(type="button") 展开/收缩第二个节点
+					button#btnCheckItem.btn(type="button") 选中周润发
+					button#btnCheckAll.btn(type="button") 全选
+					button#btnUnCheckAll.btn(type="button") 全不选
 
 block jscontent
 	script(src="/js/plugin/xjTree.js",type="text/javascript")
@@ -264,4 +267,45 @@ block jscontent
 			theme:"xe-tree-arrows", 
 			onnodeclick: function(node){node.expand();} 
 		};
-		new xjTree("tree3",option3);
+		var xjtree3 = new xjTree("tree3",option3);
+
+		$("#btnGetCheckItems").click(function(e){
+			var items =xjtree3.GetCheckedItems(true); //将半选计算在内
+			if(items && items.length>0){
+				var tmp = [] ;
+				for(var i=0,l=items.length;i<l;i++){
+					if(items[i].checkstate == 2){
+						tmp.push(items[i].text+"(半选)");
+					}
+					else{
+						tmp.push(items[i].text);
+					}
+				}
+				alert("您选中了节点：\r\n"+tmp.join(","));
+			}
+			else{
+				alert("您没有选中任何节点");
+			}
+		});
+		$("#btnGetCurItem").click(function(e){
+			var item =xjtree3.GetCurrentItem();
+			if(item)
+			{ 
+				alert("当前节点：\r\n"+item.text);
+			}
+			else{
+				alert("没有当前节点");
+			}
+		});
+		$("#btnToggleNode").click(function(e){
+			xjtree3.ToggleNode("dept2");
+		});
+		$("#btnCheckItem").click(function(e){
+			xjtree3.SetItemsCheckState("user5",1,true); //选中节点id为user5的节点，并设置级联；
+		});
+		$("#btnCheckAll").click(function(e){
+			xjtree3.CheckAll();
+		});
+		$("#btnUnCheckAll").click(function(e){
+			xjtree3.UnCheckAll();
+		});

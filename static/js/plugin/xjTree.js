@@ -153,13 +153,14 @@
             ht.push("</li>");
             nd.render = true;
     }
-    function __BindEvent__(treeid,parent,options)
-    {
+
+    function __BindEvent__(treeid,parent,options){
     	var nodes = $("li.xe-tree-node>div", parent);
         nodes.each(function(i){
             __BuildEvent__.call(this,i,treeid,options);
         });
     }
+
     function __BuildEvent__(i,treeid,options){
         $(this).hover(function() {
             $(this).addClass("xe-tree-node-over");
@@ -178,6 +179,7 @@
              }
          });
     }
+
     function __NodeClick__(e,treeid,options){
         var nodeElement = this;
         var path = $(this).attr("tpath");
@@ -258,6 +260,7 @@
             }
         }   
     }
+
     function __ExpandNode__(treeid){       
         var item = this;  
         var nid = item.id.replace(/[^\w]/gi, "_");
@@ -266,6 +269,7 @@
             img.click();
         }
     }
+
     function __GetItem__(path,options){
 		var ap = path.split(".");
         var t = options.data;
@@ -295,6 +299,7 @@
         ul.addClass("xe-tree-node-ct").css({ "z-index": 0, position: "static", visibility: "visible", top: "auto", left: "auto", display: "" });
         ul.prev().removeClass("xe-tree-node-loading");
     }
+
     function __AsnyLoad__(pnode,isAsync,options,callback){
 	    if (options.url) {
             var param;
@@ -320,6 +325,7 @@
             });
         }
     }
+
     function __BuilParam__(node){
         var p = [ { name: "id", value: encodeURIComponent(node.id) }
                 , { name: "text", value: encodeURIComponent(node.text) }
@@ -327,6 +333,30 @@
                 , { name: "checkstate", value: node.checkstate}];
         return p;
     }
+
+    function __CheckItembyId__( teedata,treeid,id, state, type, options) {       
+        if (teedata != null && teedata.length > 0) {
+            for (var i = 0, j = teedata.length; i < j; i++) {
+                __Cascade__(__DyCheck__, treeid ,teedata[i], [id, state, type],options);
+            }
+        }        
+    }
+
+    function __DyCheck__(treeid,item,idAndState,type,options) {      
+        if (item.id == idAndState[0]) { //完成匹配
+            if (idAndState[2] == 1) { //需要级联选中的
+                //遍历
+                __Cascade__(__Check__, treeid,item,idAndState[1] , options);
+                //上溯
+                __Bubble__(__Check__,treeid, item, idAndState[1],options);
+            }
+            else {              
+                __Check__(treeid,item, idAndState[1], 1 , options);
+            }
+            return false;
+        }
+    }
+
     function __Check__(treeid,item, state, type,options){
         var pstate = item.checkstate;
         if (type == 1) {
@@ -358,6 +388,7 @@
             }
         }
     }
+
     function __Cascade__(fn,treeid, item, args,options){
         if (fn(treeid,item, args, 1,options) != false) { // istrue ==break终止遍历
             if (item.ChildNodes != null && item.ChildNodes.length > 0) {
@@ -368,6 +399,7 @@
             }
         }
     }
+
     function __Bubble__(fn, treeid,item, args,options){
         var p = item.parent;
         while (p) {
@@ -386,6 +418,54 @@
             }
         }
     }
+
+    function __reflash__(treeid,itemid,options){
+        var nid = itemid.replace(/[^\w-]/gi, "_");
+        var node = $("#" + treeid + "_" + nid);
+
+        if (node.length > 0) {
+            node.addClass("xe-tree-node-loading");
+            var isend = node.hasClass("xe-tree-elbow-end") || node.hasClass("xe-tree-elbow-end-plus") || node.hasClass("xe-tree-elbow-end-minus");
+            var path = node.attr("tpath");
+            var deep = path.split(".").length;
+            var item = getItem(path);
+            if (item) {
+                __AsnyLoad__(item, true,options,function(data) {
+                    options.parsedata && options.parsedata(data);
+                    item.complete = true;
+                    item.ChildNodes = data;
+                    item.isexpand = true;
+                    if (data && data.length > 0) {
+                        item.hasChildren = true;
+                    }
+                    else {
+                        item.hasChildren = false;
+                    }
+                    var ht = [];
+                    __BuildNode__(treeid,item, ht, deep - 1, path, isend,options);
+                    ht.shift();
+                    ht.pop();
+                    var li = node.parent();
+                    li.html(ht.join(""));
+                    ht = null;
+                    __BindEvent__(treeid,li,options);
+                    __BuildEvent__.call(li.find(">div"),0,treeid,ot);
+                });
+            }
+        }
+        else {
+            alert("该节点还没有生成");
+        }
+    }
+
+    function __ToggleById__(treeid,itemId){
+        var nid = itemId.replace(/[^\w]/gi, "_");
+        var img = $("#" + treeid + "_" + nid + " img.xe-tree-ec-icon");
+        if (img.length > 0) {
+            img.click();
+        }
+    }
+    //xjTree公开的方法    
     xjTree.prototype ={
         GetCheckedItems:function(gethalfchecknode){ //获取选中的项 包含所有的节点数据
             var s = [];
@@ -398,25 +478,54 @@
             return s;
         },
         GetCurrentItem:function(){ //获取当前项
-
+            return this.options.citem;
         },
         Refresh:function(itemOrItemId){ //刷新某节点
-
+            var id;
+            if (typeof (itemOrItemId) == "string") {
+                id = itemOrItemId;
+            }
+            else {
+                id = itemOrItemId.id;
+            }
+            __reflash__(this.treeid,id,this.options);
         },
         CheckAll:function(){ //选中全部
-
+            if (this.treedata != null && this.treedata.length > 0) {
+                for (var i = 0, j = this.treedata.length; i < j; i++) {
+                    __Cascade__(__Check__ , this.treeid , this.treedata[i] , 1 , this.options);
+                }
+            }
         },
         UnCheckAll:function(){ //反选全部
-
+            if (this.treedata != null && this.treedata.length > 0) {
+                for (var i = 0, j = this.treedata.length; i < j; i++) {
+                    __Cascade__(__Check__ , this.treeid , this.treedata[i] , 0 , this.options);
+                }
+            }
         },
         SetItemsCheckState:function(itemIds, ischecked, cascadecheck){ //设置某些节点的状态
-
+            if (itemIds != null) {
+                var arrIds = itemIds.split(",");
+                if (arrIds.length > 0) {
+                    var iscascadecheck = this.options.cascadecheck;
+                    if (cascadecheck != null && typeof (cascadecheck) != "undefined") {
+                        iscascadecheck = cascadecheck;
+                    }
+                    var s = ischecked ? 1 : 0;
+                    for (var i = 0, j = arrIds.length; i < j; i++) {
+                        __CheckItembyId__(this.treedata,this.treeid,arrIds[i], s, iscascadecheck ? 1 : 0,this.options);
+                    }
+                }
+            }
         },
         ToggleNode:function(itemId){  //展开和关闭某节点
-
+            if (itemId) {
+                __ToggleById__(this.treeid,itemId);
+            }
         },
         GetTreeData:function(){ //获取所有数据
-
+            return this.treedata;
         }
     };
     window.xjTree = xjTree;

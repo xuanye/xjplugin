@@ -2,6 +2,9 @@
 exports.xjtree = function(req, res){
   res.render('xjtree', { title: 'xjplugin-xjTree示例程序',view:"sample" });
 };
+exports.bigxjtree = function(req, res){
+  res.render('bigdata_xjtree', { title: 'xjplugin-xjTree 大数据示例程序',view:"sample" });
+};
 
 exports.doquerytree = function(req, res){
    var pid = req.body.id ;
