@@ -34,15 +34,15 @@ block headercontent
 		{
 			margin:2px 5px;
 		}
-		.ico-home .xe-tree-node-icon
+		.ico-home .xj-tree-node-icon
 		{
 			background-image: url("/img/icon/home.png");
 		}
-		.ico-config .xe-tree-node-icon
+		.ico-config .xj-tree-node-icon
 		{
 			background-image: url("/img/icon/config.png");
 		}
-		.ico-user .xe-tree-node-icon
+		.ico-user .xj-tree-node-icon
 		{
 			background-image: url("/img/icon/user.png");
 		}
@@ -58,7 +58,7 @@ block content
 				|&lt;link rel="stylesheet" href="css/plugin/xjtree.css" type="text/css"&gt;
 		div.codep
 			code
-				|&lt;script src="js/plugin/xjTree.js" type="text/javascript"&gt;&lt;/script&gt;
+				|&lt;script src="js/plugin/xjtree.js" type="text/javascript"&gt;&lt;/script&gt;
 	h5 1. 一次加载所有数据，不涉及服务端，以下代码生成两层的树形数据
 	div.row-fluid
 		div.span8			
@@ -80,7 +80,7 @@ block content
 					|generateChildNodes("t1","生成的分组",true,"",treedata1,10);	//生成数据，只生成两层
 					|var option1 = { 
 					|	data: treedata1, //初次加载的数据源
-					|	theme:"xe-tree-arrows", //配置默认主题
+					|	theme:"xj-tree-arrows", //配置默认主题
 					|	onnodeclick: function(node){node.expand();}  //点击节点展开树
 					|}; //树插件的参数配置
 					|new xjTree("tree1",option1); //什么xjTree插件
@@ -89,14 +89,14 @@ block content
 			div.toolbar.alert.alert-info
 				div.tip 自带的三种风格主题，点击切换
 				label.radiobox.inline
-					input(type="radio",name="tree1_changetheme",value="xe-tree-arrows",checked)
-					|xe-tree-arrows
+					input(type="radio",name="tree1_changetheme",value="xj-tree-arrows",checked)
+					|xj-tree-arrows
 				label.radiobox.inline
-					input(type="radio",name="tree1_changetheme",value="xe-tree-lines")
-					|xe-tree-lines
+					input(type="radio",name="tree1_changetheme",value="xj-tree-lines")
+					|xj-tree-lines
 				label.radiobox.inline
-					input(type="radio",name="tree1_changetheme",value="xe-tree-no-lines")
-					|xe-tree-no-lines	
+					input(type="radio",name="tree1_changetheme",value="xj-tree-no-lines")
+					|xj-tree-no-lines	
 	h5 2. 先加载一层然后异步加载节点，对于大数据量的树 非常合适
 	div.row-fluid
 		div.span8
@@ -105,7 +105,7 @@ block content
 				| 然后设置自定义的图标即可
 			pre 
 				code
-					|.ico-home .xe-tree-node-icon
+					|.ico-home .xj-tree-node-icon
 					|{
 					|	background-image: url("/img/icon/home.png");
 					|}			
@@ -114,13 +114,13 @@ block content
 				code					
 					|var treedata2=[
 					|	{id:"root0","text":"根节点1","hasChildren":true,"classes":"ico-home","ChildNodes":[],"complete":false},
-					|	{id:"root1","text":"根节点2-无图标","hasChildren":true,"classes":"xe-tree-noicon","ChildNodes":[],"complete":false},
+					|	{id:"root1","text":"根节点2-无图标","hasChildren":true,"classes":"xj-tree-noicon","ChildNodes":[],"complete":false},
 					|	{id:"root2","text":"根节点3-没子节点","hasChildren":false,"classes":"ico-config","ChildNodes":[]}
 					|];
 					|var option2 ={
 					|	data: treedata2,
 					|	url:"/sample/querytree1", // 异步获取的需要配置一个URL，插件在需要数据时自动
-					|	theme:"xe-tree-arrows", 
+					|	theme:"xj-tree-arrows", 
 					|	onnodeclick: function(node){node.expand();} 
 					|};
 					|new xjTree("tree2",option2);
@@ -179,7 +179,7 @@ block content
 					|	data: treedata3,
 					|	showcheck:true,		
 					|	//cascadecheck: true,	//上下级联选中 默认为Tree
-					|	theme:"xe-tree-arrows", 
+					|	theme:"xj-tree-arrows", 
 					|	onnodeclick: function(node){node.expand();} 
 					|};
 					|new xjTree("tree3",option3);
@@ -196,7 +196,7 @@ block content
 					button#btnUnCheckAll.btn(type="button") 全不选
 
 block jscontent
-	script(src="/js/plugin/xjTree.js",type="text/javascript")
+	script(src="/js/plugin/xjtree.js",type="text/javascript")
 	script.
 		//------------------示例1代码-------------------------------------------------------------------
 		function generateChildNodes(id,text,hasChild,classes,pitem,count)
@@ -215,7 +215,7 @@ block jscontent
 		generateChildNodes("t1","生成的分组",true,"",treedata1,10);		
 		var option1 = { 
 			data: treedata1,
-			theme:"xe-tree-arrows", 
+			theme:"xj-tree-arrows", 
 			onnodeclick: function(node){node.expand();} 
 		};
 		new xjTree("tree1",option1);
@@ -229,18 +229,18 @@ block jscontent
 		});
 		//切换样式的方法
 		function changeTheme(treeId,newTheme){
-			$("#"+treeId +" ul.xe-tree-root")[0].className="xe-tree-root "+newTheme; //保留示例中的tree_container,实际中可能不需要，实际使用中一般也不换样式
+			$("#"+treeId +" ul.xj-tree-root")[0].className="xj-tree-root "+newTheme; //保留示例中的tree_container,实际中可能不需要，实际使用中一般也不换样式
 		}
 		//------------------示例2代码-------------------------------------------------------------------
 		var treedata2=[
 			{id:"root0","text":"根节点1","hasChildren":true,"classes":"ico-home","ChildNodes":[],"complete":false},
-			{id:"root1","text":"根节点2-无图标","hasChildren":true,"classes":"xe-tree-noicon","ChildNodes":[],"complete":false},
+			{id:"root1","text":"根节点2-无图标","hasChildren":true,"classes":"xj-tree-noicon","ChildNodes":[],"complete":false},
 			{id:"root2","text":"根节点3-没子节点","hasChildren":false,"classes":"ico-config","ChildNodes":[]}
 		];
 		var option2 ={
 			data: treedata2,
 			url:"/sample/querytree",
-			theme:"xe-tree-arrows", 
+			theme:"xj-tree-arrows", 
 			onnodeclick: function(node){node.expand();} 
 		};
 		new xjTree("tree2",option2);
@@ -264,7 +264,7 @@ block jscontent
 			data: treedata3,
 			showcheck:true,		
 			//cascadecheck: true,	//上下级联选中 默认为Tree
-			theme:"xe-tree-arrows", 
+			theme:"xj-tree-arrows", 
 			onnodeclick: function(node){node.expand();} 
 		};
 		var xjtree3 = new xjTree("tree3",option3);

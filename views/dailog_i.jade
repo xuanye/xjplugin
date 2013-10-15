@@ -1,0 +1,49 @@
+doctype 5
+html
+	head
+	title=title
+	meta(name="viewport",content="width=device-width, initial-scale=1, maximum-scale=1")
+	link(href="favicon.png",rel="icon")
+	link(rel="stylesheet",href="/css/bootstrap.min.css",media="screen",type="text/css")
+	link(rel="stylesheet",href="/css/google-bootstrap.css",media="screen",type="text/css")
+	link(rel="stylesheet",href="/css/common.css",media="screen",type="text/css")	
+	style(type="text/css")
+		body{
+			font-size:12px;
+			background:#fff;
+			padding:25px 10px;
+		}
+		.btnpanel
+		{
+			margin:140px auto 30px auto;
+			width:150px;
+		}
+body	
+	-if( type == 2 )
+		div 
+			a#abtnclose.close
+	
+	div.alert.alert-info 
+		|这是iframedailog中的页面
+	div
+		pre
+			code
+
+	div.btnpanel
+		button#btnClose.btn.btn-primary.btn-large(type="button") 关闭Dailog,并回掉函数
+
+	script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js")
+	script.
+		$("#btnClose").click(closeAndCallbak);
+
+		-if(type==1)	
+			|$("#abtnClose").click(close);
+			|function close()
+			|{
+			|	parent.dailog.close();
+			|}
+		
+			|function closeAndCallbak()
+			|{
+			|	parent.dailog.close(null,true,{msg:"成功!"});
+			|}

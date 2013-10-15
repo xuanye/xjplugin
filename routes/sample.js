@@ -6,6 +6,15 @@ exports.bigxjtree = function(req, res){
   res.render('bigdata_xjtree', { title: 'xjplugin-xjTree 大数据示例程序',view:"sample" });
 };
 
+exports.dailog = function(req, res){
+  res.render('dailog', { title: 'xjplugin-xjIframeDailog示例程序',view:"sample" });
+};
+exports.dailog_i_1 = function(req, res){
+  res.render('dailog_i', { title: 'xjplugin-xjIframeDailog示例程序',type:1});
+};
+exports.dailog_i_2 = function(req, res){
+  res.render('dailog_i', { title: 'xjplugin-xjIframeDailog示例程序',type:2});
+};
 exports.doquerytree = function(req, res){
    var pid = req.body.id ;
    var ptext = decodeURIComponent(req.body.text);

@@ -36,7 +36,7 @@ app.get('/:action',function(req, res, next){
 	  }
 	  else
 	  {
-	    res.status(404);
+	    res.send(404, '页面地址不存在，请检查后重试!');
 	    res.end();
 	  }
 });
@@ -47,7 +47,7 @@ app.get('/sample/:action', function(req, res, next){
 	}
 	else
 	{
-	   res.status(404);
+	   res.send(404, '页面地址不存在，请检查后重试!');
 	   res.end();
 	}
 });
@@ -59,7 +59,7 @@ app.post('/sample/:action', function(req, res, next){
 	}
 	else
 	{
-	   res.status(404);
+	   res.send(404, '页面地址不存在，请检查后重试!');
 	   res.end();
 	}
 });

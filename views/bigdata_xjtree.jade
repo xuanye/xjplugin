@@ -37,7 +37,7 @@ block content
 					| 	data: treedata,
 					| 	showcheck:true,		
 					| 	//cascadecheck: true,	//上下级联选中 默认为Tree
-					| 	theme:"xe-tree-arrows", 
+					| 	theme:"xj-tree-arrows", 
 					| 	onnodeclick: function(node){node.expand();} 
 					| };
 					| var bigtree = new xjTree("bigtree",option);
@@ -45,14 +45,14 @@ block content
 			div#bigtree.tree_container	
 
 block jscontent
-	script(src="/js/plugin/xjTree.js",type="text/javascript")
+	script(src="/js/plugin/xjtree.js",type="text/javascript")
 	script(src="/data/bigtreedata.js",type="text/javascript")
 	script.
 		var option ={
 			data: treedata,
 			showcheck:true,		
 			//cascadecheck: true,	//上下级联选中 默认为Tree
-			theme:"xe-tree-arrows", 
+			theme:"xj-tree-arrows", 
 			onnodeclick: function(node){node.expand();} 
 		};
 		var bigtree = new xjTree("bigtree",option);

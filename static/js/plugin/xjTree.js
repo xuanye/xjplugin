@@ -1,5 +1,5 @@
 ﻿//依赖 jquery 1.2.6+
-(function(window,undefined,$){
+;(function(window,undefined,$){
 
     //扩展jquery的方法
     $.fn.swapClass = function(c1, c2) {
@@ -27,7 +27,7 @@
         cascadecheck: true,
         data: null,
         preloadcomplete: false,      
-        theme: "xe-tree-arrows" //xe-tree-line,xe-tree-no-lines,xe-tree-arrows-newico
+        theme: "xj-tree-arrows" //xj-tree-line,xj-tree-no-lines,xj-tree-arrows-newico
     };
     function xjTree(id,options){
     	var self = this;
@@ -45,15 +45,15 @@
         __BuildTreeRoot__(this.treeid,this.treedata,html,this.options); //构建HTML
       
         //console.info(html.length);
-        this.el.addClass('xe-tree').html(html.join(""));
+        this.el.addClass('xj-tree').html(html.join(""));
        
      	__BindEvent__(this.treeid,this.el,this.options);
        
     }
     function __BuildTreeRoot__(treeid,data,ht,options){
-		ht.push("<div class='xe-tree-bwrap'>"); // Wrap ;
-        ht.push("<div class='xe-tree-body'>"); // body ;
-        ht.push("<ul class='xe-tree-root ", options.theme, "'>"); //root
+		ht.push("<div class='xj-tree-bwrap'>"); // Wrap ;
+        ht.push("<div class='xj-tree-body'>"); // body ;
+        ht.push("<ul class='xj-tree-root ", options.theme, "'>"); //root
         if (data && data.length > 0) {
             var l = data.length;
             for (var i = 0; i < l; i++) {
@@ -81,28 +81,28 @@
     function __BuildNode__(treeid,nd, ht, deep, path, isend,options){
             nd.isend = isend;
             var nid = nd.id.replace(/[^\w]/gi, "_");
-            ht.push("<li class='xe-tree-node'>");
+            ht.push("<li class='xj-tree-node'>");
             ht.push("<div id='", treeid, "_", nid, "' tpath='", path, "' unselectable='on' title='", nd.text, "'");
             var cs = [];
-            cs.push("xe-tree-node-el");
+            cs.push("xj-tree-node-el");
             if (nd.hasChildren) {
-                cs.push(nd.isexpand ? "xe-tree-node-expanded" : "xe-tree-node-collapsed");
+                cs.push(nd.isexpand ? "xj-tree-node-expanded" : "xj-tree-node-collapsed");
             }
             else {
-                cs.push("xe-tree-node-leaf");
+                cs.push("xj-tree-node-leaf");
             }
             if (nd.classes) { cs.push(nd.classes); }
 
             ht.push(" class='", cs.join(" "), "'>");
             //span indent
-            ht.push("<span class='xe-tree-node-indent'>");
+            ht.push("<span class='xj-tree-node-indent'>");
             if (deep == 1) {
-                ht.push("<img class='xe-tree-icon' src='", options.emptyiconpath, "'/>");
+                ht.push("<img class='xj-tree-icon' src='", options.emptyiconpath, "'/>");
             }
             else if (deep > 1) {
-                ht.push("<img class='xe-tree-icon' src='", options.emptyiconpath, "'/>");
+                ht.push("<img class='xj-tree-icon' src='", options.emptyiconpath, "'/>");
                 for (var j = 1; j < deep; j++) {
-                    ht.push("<img class='xe-tree-elbow-line' src='", options.emptyiconpath, "'/>");
+                    ht.push("<img class='xj-tree-elbow-line' src='", options.emptyiconpath, "'/>");
                 }
             }
             ht.push("</span>");
@@ -110,33 +110,33 @@
             cs.length = 0;
             if (nd.hasChildren) {
                 if (nd.isexpand) {
-                    cs.push(isend ? "xe-tree-elbow-end-minus" : "xe-tree-elbow-minus");
+                    cs.push(isend ? "xj-tree-elbow-end-minus" : "xj-tree-elbow-minus");
                 }
                 else {
-                    cs.push(isend ? "xe-tree-elbow-end-plus" : "xe-tree-elbow-plus");
+                    cs.push(isend ? "xj-tree-elbow-end-plus" : "xj-tree-elbow-plus");
                 }
             }
             else {
-                cs.push(isend ? "xe-tree-elbow-end" : "xe-tree-elbow");
+                cs.push(isend ? "xj-tree-elbow-end" : "xj-tree-elbow");
             }
-            ht.push("<img class='xe-tree-ec-icon ", cs.join(" "), "' src='", options.emptyiconpath, "'/>");
-            ht.push("<img class='xe-tree-node-icon' src='", options.emptyiconpath, "'/>");
+            ht.push("<img class='xj-tree-ec-icon ", cs.join(" "), "' src='", options.emptyiconpath, "'/>");
+            ht.push("<img class='xj-tree-node-icon' src='", options.emptyiconpath, "'/>");
             //checkbox
             if (options.showcheck && nd.showcheck) {
                 if (nd.checkstate == null || nd.checkstate == undefined) {
                     nd.checkstate = 0;
                 }
-                ht.push("<img  id='", treeid, "_", nid, "_cb' class='xe-tree-node-cb' src='", options.cbiconpath, options.icons[nd.checkstate], "'/>");
+                ht.push("<img  id='", treeid, "_", nid, "_cb' class='xj-tree-node-cb' src='", options.cbiconpath, options.icons[nd.checkstate], "'/>");
             }
             //a
-            ht.push("<a hideFocus class='xe-tree-node-anchor' tabIndex=1 href='javascript:void(0);'>");
+            ht.push("<a hideFocus class='xj-tree-node-anchor' tabIndex=1 href='javascript:void(0);'>");
             ht.push("<span unselectable='on'>", nd.text, "</span>");
             ht.push("</a>");
             ht.push("</div>");
             //Child
             if (nd.hasChildren) {
                 if (nd.isexpand) {
-                    ht.push("<ul  class='xe-tree-node-ct'  style='z-index: 0; position: static; visibility: visible; top: auto; left: auto;'>");
+                    ht.push("<ul  class='xj-tree-node-ct'  style='z-index: 0; position: static; visibility: visible; top: auto; left: auto;'>");
                     if (nd.ChildNodes) {
                         var l = nd.ChildNodes.length;
                         for (var k = 0; k < l; k++) {
@@ -155,7 +155,7 @@
     }
 
     function __BindEvent__(treeid,parent,options){
-    	var nodes = $("li.xe-tree-node>div", parent);
+    	var nodes = $("li.xj-tree-node>div", parent);
         nodes.each(function(i){
             __BuildEvent__.call(this,i,treeid,options);
         });
@@ -163,18 +163,18 @@
 
     function __BuildEvent__(i,treeid,options){
         $(this).hover(function() {
-            $(this).addClass("xe-tree-node-over");
+            $(this).addClass("xj-tree-node-over");
         }, function() {
-            $(this).removeClass("xe-tree-node-over");
+            $(this).removeClass("xj-tree-node-over");
         }).click(function(e){
             __NodeClick__.call(this,e,treeid,options);
         })
-         .find("img.xe-tree-ec-icon").each(function(e) {
-             if (!$(this).hasClass("xe-tree-elbow")) {
+         .find("img.xj-tree-ec-icon").each(function(e) {
+             if (!$(this).hasClass("xj-tree-elbow")) {
                  $(this).hover(function() {
-                     $(this).parent().addClass("xe-tree-ec-over");
+                     $(this).parent().addClass("xj-tree-ec-over");
                  }, function() {
-                     $(this).parent().removeClass("xe-tree-ec-over");
+                     $(this).parent().removeClass("xj-tree-ec-over");
                  });
              }
          });
@@ -187,9 +187,9 @@
         var item = __GetItem__(path,options);
         if (et.tagName == "IMG") {
             // +号需要展开
-            if ($(et).hasClass("xe-tree-elbow-plus") || $(et).hasClass("xe-tree-elbow-end-plus")) {
-                var ul = $(nodeElement).next(); //"xe-tree-node-ct"
-                if (ul.hasClass("xe-tree-node-ct")) {
+            if ($(et).hasClass("xj-tree-elbow-plus") || $(et).hasClass("xj-tree-elbow-end-plus")) {
+                var ul = $(nodeElement).next(); //"xj-tree-node-ct"
+                if (ul.hasClass("xj-tree-node-ct")) {
                     ul.show();
                 }
                 else {
@@ -198,7 +198,7 @@
                         item.ChildNodes != null && __AsnyBuild__(treeid,item.ChildNodes, deep, path, ul, item,options);
                     }
                     else {
-                        $(nodeElement).addClass("xe-tree-node-loading");
+                        $(nodeElement).addClass("xj-tree-node-loading");
                         __AsnyLoad__(item, true, options,function(data) {
                             options.parsedata && options.parsedata(data);
                             item.complete = true;
@@ -207,25 +207,25 @@
                         });
                     }
                 }
-                if ($(et).hasClass("xe-tree-elbow-plus")) {
-                    $(et).swapClass("xe-tree-elbow-plus", "xe-tree-elbow-minus");
+                if ($(et).hasClass("xj-tree-elbow-plus")) {
+                    $(et).swapClass("xj-tree-elbow-plus", "xj-tree-elbow-minus");
                 }
                 else {
-                    $(et).swapClass("xe-tree-elbow-end-plus", "xe-tree-elbow-end-minus");
+                    $(et).swapClass("xj-tree-elbow-end-plus", "xj-tree-elbow-end-minus");
                 }
-                $(this).swapClass("xe-tree-node-collapsed", "xe-tree-node-expanded");
+                $(this).swapClass("xj-tree-node-collapsed", "xj-tree-node-expanded");
             }
-            else if ($(et).hasClass("xe-tree-elbow-minus") || $(et).hasClass("xe-tree-elbow-end-minus")) {  //- 号需要收缩                    
+            else if ($(et).hasClass("xj-tree-elbow-minus") || $(et).hasClass("xj-tree-elbow-end-minus")) {  //- 号需要收缩                    
                 $(this).next().hide();
-                if ($(et).hasClass("xe-tree-elbow-minus")) {
-                    $(et).swapClass("xe-tree-elbow-minus", "xe-tree-elbow-plus");
+                if ($(et).hasClass("xj-tree-elbow-minus")) {
+                    $(et).swapClass("xj-tree-elbow-minus", "xj-tree-elbow-plus");
                 }
                 else {
-                    $(et).swapClass("xe-tree-elbow-end-minus", "xe-tree-elbow-end-plus");
+                    $(et).swapClass("xj-tree-elbow-end-minus", "xj-tree-elbow-end-plus");
                 }
-                $(this).swapClass("xe-tree-node-expanded", "xe-tree-node-collapsed");
+                $(this).swapClass("xj-tree-node-expanded", "xj-tree-node-collapsed");
             }
-            else if($(et).hasClass("xe-tree-node-cb")) // 点击了Checkbox
+            else if($(et).hasClass("xj-tree-node-cb")) // 点击了Checkbox
             {
                 var s = item.checkstate != 1 ? 1 : 0;
                 var r = true;
@@ -248,10 +248,10 @@
         else {
             if (options.citem) {
                 var nid = options.citem.id.replace(/[^\w]/gi, "_");
-                $("#" + treeid + "_" + nid).removeClass("xe-tree-selected");
+                $("#" + treeid + "_" + nid).removeClass("xj-tree-selected");
             }
             options.citem = item;
-            $(this).addClass("xe-tree-selected");
+            $(this).addClass("xj-tree-selected");
             if (options.onnodeclick) {
                 if (!item.expand) {
                    item.expand = function() { __ExpandNode__.call(item,treeid); };
@@ -264,7 +264,7 @@
     function __ExpandNode__(treeid){       
         var item = this;  
         var nid = item.id.replace(/[^\w]/gi, "_");
-        var img = $("#" + treeid + "_" + nid + " img.xe-tree-ec-icon");
+        var img = $("#" + treeid + "_" + nid + " img.xj-tree-ec-icon");
         if (img.length > 0) {
             img.click();
         }
@@ -296,8 +296,8 @@
             ht = null;
             __BindEvent__(treeid,ul,options);
         }           
-        ul.addClass("xe-tree-node-ct").css({ "z-index": 0, position: "static", visibility: "visible", top: "auto", left: "auto", display: "" });
-        ul.prev().removeClass("xe-tree-node-loading");
+        ul.addClass("xj-tree-node-ct").css({ "z-index": 0, position: "static", visibility: "visible", top: "auto", left: "auto", display: "" });
+        ul.prev().removeClass("xj-tree-node-loading");
     }
 
     function __AsnyLoad__(pnode,isAsync,options,callback){
@@ -424,8 +424,8 @@
         var node = $("#" + treeid + "_" + nid);
 
         if (node.length > 0) {
-            node.addClass("xe-tree-node-loading");
-            var isend = node.hasClass("xe-tree-elbow-end") || node.hasClass("xe-tree-elbow-end-plus") || node.hasClass("xe-tree-elbow-end-minus");
+            node.addClass("xj-tree-node-loading");
+            var isend = node.hasClass("xj-tree-elbow-end") || node.hasClass("xj-tree-elbow-end-plus") || node.hasClass("xj-tree-elbow-end-minus");
             var path = node.attr("tpath");
             var deep = path.split(".").length;
             var item = getItem(path);
@@ -460,7 +460,7 @@
 
     function __ToggleById__(treeid,itemId){
         var nid = itemId.replace(/[^\w]/gi, "_");
-        var img = $("#" + treeid + "_" + nid + " img.xe-tree-ec-icon");
+        var img = $("#" + treeid + "_" + nid + " img.xj-tree-ec-icon");
         if (img.length > 0) {
             img.click();
         }
