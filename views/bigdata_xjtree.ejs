@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<%include header%>
+		<link rel="stylesheet" href="/css/plugin/xjtree.css"media="screen" type="text/css"/>
+		<style type="text/css">
+			.tree_container{
+				border:solid 1px #ccc;
+				padding:5px 10px;
+				background-color: #FEFEFE;
+				height:450px;
+				overflow:auto;
+			}
+			.codep{
+				padding:5px;
+			}	
+		</style>
+	</head>
+	<body>
+		<%include toper%>
+		<div class="container">
+			<h3>树控件（xjTree）使用样例</h3>
+			<div>
+				<div class="alert alert-info">		   
+				  该示例数据为中国行政区,一次加载完成, 共3000+个节点，因为xjTree采用异步Render，即在节点第一次被展开时才真正输出html到dom中。
+				  内部封装的数据结构 完全不影响全选，设置选中等数据化操作。  
+				</div>
+			</div>
+			<h5> 中国行政区划树，可点选操作下</h5>
+			<div class="row-fluid">
+				<div class="span8">     
+					<div class="codep"><code>&lt;div id="bigtree" class="tree_container"&gt;&lt;/div&gt;      </code></div>
+					<div class="codep"><code>&lt;script src="/data/bigtreedata.js" type="text/javascript"&gt;&lt;/script&gt;</code></div>
+					<pre><code>var option ={
+  data: treedata,
+  showcheck:true,    
+  //cascadecheck: true,  //上下级联选中 默认为Tree
+  theme:"xj-tree-arrows", 
+  onnodeclick: function(node){node.expand();} 
+};
+var bigtree = new xjTree("bigtree",option);</code></pre>
+				</div>
+				<div class="span4">
+					<div id="bigtree" class="tree_container"> </div>
+				</div>
+			</div>
+		</div>
+		<%include bottomer%>
+		<script type="text/javascript" src="/js/plugin/xjtree.js"></script>
+		<script type="text/javascript" src="/data/bigtreedata.js"></script>
+		<script type="text/javascript">
+			var option ={
+				data: treedata,
+				showcheck:true,		
+				//cascadecheck: true,	//上下级联选中 默认为Tree
+				theme:"xj-tree-arrows", 
+				onnodeclick: function(node){node.expand();} 
+			};
+			var bigtree = new xjTree("bigtree",option);
+		</script>
+	</body>
+</html>
+		
+

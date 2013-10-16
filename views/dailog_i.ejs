@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>	
+		<title><%= title %></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link href="favicon.png" rel="icon">
+		<link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+		<link rel="stylesheet" href="/css/google-bootstrap.css" media="screen" type="text/css">
+		<link rel="stylesheet" href="/css/common.css" media="screen" type="text/css">	
+		<style>
+			body{
+			font-size:12px;
+			background:#fff;
+			padding:25px 10px;
+			}
+			.btnpanel
+			{
+				margin:140px auto 30px auto;
+				width:150px;
+			}
+		</style>
+	</head>
+	<body>	
+		<div class="container">
+			<% if(type ==2 ){%>
+			<div><a id="abtnclose" class="close"></a></div>			
+			<%}%>
+			<div class="alert alert-info">       
+		      这是iframedailog中的页面
+		    </div>
+		    <div>
+		      <pre><code></code></pre>
+		    </div>
+		    <div class="btnpanel">
+		      <button id="btnClose" type="button" class="btn btn-primary btn-large">关闭Dailog,并回掉函数</button>
+		    </div>
+		 </div>
+	    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js" type="text/javascript"> </script>	
+	    <script type="text/javascript">
+	        $("#btnClose").click(closeAndCallbak);	        
+	        <% if(type==2) { %>
+	          $("#abtnClose").click(close);
+	          function close()
+	          {
+	            parent.dailog.close();
+	          }
+	        <%}%> 
+			function closeAndCallbak()
+			{
+				parent.dailog.close(null,true,{msg:"成功!"});
+			}
+	    </script>	
+	</body>
+</html>
