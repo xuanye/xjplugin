@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>	
+		<title><%= title %></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link href="favicon.png" rel="icon">
+		<link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+		<link rel="stylesheet" href="/css/google-bootstrap.css" media="screen" type="text/css">
+		<link rel="stylesheet" href="/css/common.css" media="screen" type="text/css">	
+		<style  type="text/css">
+			html{
+				margin:0;
+				padding: 0;
+				height: 100%;
+				width: 100%;
+			}
+			body{				
+				font-size:12px;
+				background:#fff;
+				padding:25px 10px;
+			}
+			.btnpanel
+			{
+				margin:40px auto 30px auto;
+				width:150px;
+			}
+			a#abtnclose{
+				position: absolute;
+				right: 5px;
+				top:2px;
+				display: block;
+				width: 16px;
+				height: 16px;	
+				cursor: pointer;
+				opacity:.5;
+				-moz-opacity:.5;
+				filter:alpha(opacity=50);			
+			}
+			a#abtnclose:hover{
+				
+				opacity:1;
+				-moz-opacity:1;
+				filter:alpha(opacity=100);	
+			}
+			.icon-close
+			{
+				display: block;
+				width: 16px;
+				height: 16px;	
+				background:transparent url("/img/icon/close.png") no-repeat center center;
+			}
+		</style>
+	</head>
+	<body>			
+		<% if(type ==2 ){%>
+		<div><a id="abtnclose" href="#" title="关闭窗口，但是不触发毁掉"><i class="icon-close"></i></a></div>			
+		<%}%>
+		<div class="alert alert-info">       
+	      这是iframedailog中的页面，点击蓝色按钮 关闭模态窗口，并激活回调函数
+	    </div>
+	    <div>
+	      <pre><code>$("#btnClose").click(closeAndCallbak);
+function closeAndCallbak()
+{
+	parent.dailog.Close(null,true,{msg:"成功!"}); 
+}</code></pre>
+	    </div>
+	        <div>
+	      <pre><code> $("#abtnclose").click(close);
+function close()
+{
+  parent.dailog.Close(); //关闭窗口 ，但不激活回调
+}</code></pre>
+	    </div>
+	    <div class="btnpanel">
+	      <button id="btnClose" type="button" class="btn btn-primary btn-large">关闭Dailog,并回掉函数</button>
+	    </div>
+		
+	    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js" type="text/javascript"> </script>	
+	    <script type="text/javascript">
+	        $("#btnClose").click(closeAndCallbak);	        
+	        <% if(type == 2) { %>
+	        $("#abtnclose").click(close);
+	        function close()
+	        {
+	          parent.dailog.Close();
+	        }
+	        <%}%> 
+			function closeAndCallbak()
+			{
+				parent.dailog.Close(null,true,{msg:"成功!"});
+			}
+	    </script>	
+	</body>
+</html>

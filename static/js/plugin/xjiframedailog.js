@@ -11,7 +11,7 @@
 				wp:14
 			},
 			simple:{
-				box:"<div id='dailog_${id}' class='xj-window xj-window-plain'></div>",
+				box:"<div id='dailog_${id}' class='xj-window xj-window-dailog'></div>",
 				header:"<div id='dailog_head_${id}' class='xj-dailog-tl'></div>",
 				body:"<div class='xj-window-bwrap'><div id='dailog_body_${id}' style='width: ${width}px; height: ${height}px' class='xj-window-body'>${iframehtml}</div></div>",
 				iframe:"<iframe id='dailog_iframe_${id}' border='0' frameBorder='0' src='${url}' style='border:none;width:${width}px;height:${height}px'></iframe>",
@@ -60,16 +60,16 @@
 			var self = this;
 			if(this.opening){
 				return false;
-			}
+			}		
 			this.opening = true;
-			this.options = $.extend(options,{
+			this.options = options = $.extend({
 				            width: 600,
 				            height: 400,
 				            caption: '无主题窗口',
 				            enabledrag: true,
 				            theme:"default",
 				            onclose: null
-			});			
+			},options);			
         	options.id = (new Date()).valueOf();
         	options.caption = __escapeHTML__(options.caption);
         	options.url = url + (url.indexOf('?') > -1 ? '&' : '?') + '_=' + (new Date()).valueOf(); 
