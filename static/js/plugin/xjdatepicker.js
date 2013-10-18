@@ -56,7 +56,7 @@
         }
         options.el = this.el;
         options.elid = id;
-        this.options = $.extend({
+        this.options= options = $.extend({
         	weekStart: 0,
             weekName: ["日", "一", "二", "三", "四", "五", "六"], //星期的格式
             monthName: ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "十二"], //月份的格式
@@ -70,10 +70,9 @@
             btnToday: "今天",
             inputDate: null,
             onReturn: false,
-            version: "1.2",
             showtime: false,
             applyrule: false, //function(){};return rule={startdate,endate};
-            showtarget: null,
+            showtarget: null, 
             picker: ""
         },options);
         this.pickerid = id +"_picker";
@@ -81,39 +80,32 @@
         __InitHtml__(this.pickerid,options,html)        
         $(document.body).append(html.join("")); 
 
-        __InitEvents__(pickerid,options);
+        __InitEvents__(this.pickerid,options);
 
-        //init picker
-		this.el.addClass("xj-dp-input");
+        //init picker       
+		this.el.addClass(options.showtime?"xj-dp-input-time":"xj-dp-input");
+
 		if(options.picker !=""){
 			var picker = $(options.picker);
-			(!!options.showtarget) && this.el.after(picker);
-
+			this.el.after(picker);
 			picker.click(function(e){
-				self.Show.call(self);
-				$(document).one("click",function(){
-					self.Hide.call(self);
-				});
+				self.Show.call(self);				
 				return false;
 			});
 		}
-
-		
-
-		
 	}
-	function __InitHtml__(pickerId,options,cpHA){
-	    cpHA.push("<div id='",pickerId,"' class='xj-dp' style='width:175px;z-index:999;'>");
+	function __InitHtml__(pickerid,options,cpHA){
+	    cpHA.push("<div id='",pickerid,"' class='xj-dp' style='width:175px;z-index:999;'>");
         //if ($.browser.msie6) {
             //cpHA.push('<iframe style="position:absolute;z-index:-1;width:100%;height:205px;top:0;left:0;scrolling:no;" frameborder="0" src="about:blank"></iframe>');
         //}
         cpHA.push("<table class='xj-dp-maintable' cellspacing='0' cellpadding='0' style='width:175px;'><tbody><tr><td>");
         //头哟
-        cpHA.push("<table class='xj-dp-top' cellspacing='0'><tr><td class='xj-dp-top-left'> <a id='",pickerId,"_leftbtn' href='javascript:void(0);' title='向前一个月'>&nbsp;</a></td><td class='xj-dp-top-center' align='center'><em><button id='",pickerid,"_ymbtn'>九月 2009</button></em></td><td class='xj-dp-top-right'><a id='",pickerid,"_rightbtn' href='javascript:void(0);' title='向后一个月'>&nbsp;</a></td></tr></table>");
+        cpHA.push("<table class='xj-dp-top' cellspacing='0'><tr><td class='xj-dp-top-left'> <a id='",pickerid,"_leftbtn' href='javascript:void(0);' title='向前一个月'>&nbsp;</a></td><td class='xj-dp-top-center' align='center'><em><button id='",pickerid,"_ymbtn'>九月 2009</button></em></td><td class='xj-dp-top-right'><a id='",pickerid,"_rightbtn' href='javascript:void(0);' title='向后一个月'>&nbsp;</a></td></tr></table>");
         cpHA.push("</td></tr>");
         cpHA.push("<tr><td>");
         //周
-        cpHA.push("<table id='",pickerId,"_innner' class='xj-dp-inner' cellspacing='0'><thead><tr>");
+        cpHA.push("<table id='",pickerid,"_inner' class='xj-dp-inner' cellspacing='0'><thead><tr>");
         //生成周
         for (var i = options.weekStart, j = 0; j < 7; j++) {
             cpHA.push("<th><span>", options.weekName[i], "</span></th>");
@@ -150,7 +142,7 @@
         cpHA.push("<td class='xj-dp-mp-month' xmonth='5'><a href='javascript:void(0);'>", options.monthName[5], "</a></td><td class='xj-dp-mp-month xj-dp-mp-sep' xmonth='11'><a href='javascript:void(0);'>", options.monthName[11], "</a></td><td class='xj-dp-mp-year'><a href='javascript:void(0);'></a></td><td class='xj-dp-mp-year'><a href='javascript:void(0);'></a></td>");
         cpHA.push("</tr>");
         cpHA.push("<tr class='xj-dp-mp-btns'>");
-        cpHA.push("<td colspan='4'><button id='",pickerid,"_mpokey' class='xj-dp-mp-ok'>", def.btnOk, "</button><button id='",pickerid,"_mpcancel' class='xj-dp-mp-cancel'>", def.btnCancel, "</button></td>");
+        cpHA.push("<td colspan='4'><button id='",pickerid,"_mpokey' class='xj-dp-mp-ok'>", options.btnOk, "</button><button id='",pickerid,"_mpcancel' class='xj-dp-mp-cancel'>", options.btnCancel, "</button></td>");
         cpHA.push("</tr>");
 
         cpHA.push("</tbody></table>");
@@ -171,7 +163,7 @@
         $("#"+pickerid+"_leftbtn").click(function(e){
         	return __PrevMonth__.call(this,e,pickerid,options);
         });
-        $("#"+pickerid+"_rigthbtn").click(function(e){
+        $("#"+pickerid+"_rightbtn").click(function(e){
         	return __NextMonth__.call(this,e,pickerid,options);
         });
 
@@ -204,26 +196,26 @@
 	function __TimeEnter__(e,pickerid,options){
 		if (e.keyCode == 13) { //ENTER
             var timevalue = $(this).val();
-            if (!/\d{2}:\d{2}:\d{2}/.test(timevalue)) {
-                timevalue = "00:00:00";
+            if (!/\d{2}:\d{2}/.test(timevalue)) {
+                timevalue = "00:00";
             }
             var arrtime = timevalue.split(":");
-            if (arrtime.length == 3) {
+            if (arrtime.length == 2) {
                 var d = new Date(options.Year, options.Month - 1,options.Day);              
-                d.setHours(arrtime[0], arrtime[1], arrtime[2]);            
+                d.setHours(arrtime[0], arrtime[1], 0);            
                 __ReturnDate__(d,pickerid,options);
             }
         }        
 	}
 	function __MPOkey__(e,pickerid,options){
-		options.Year = def.cy;
-        options.Month = def.cm + 1;
+		options.Year = options.cy;
+        options.Month = options.cm + 1;
         options.Day = 1;
         $("#"+pickerid+"_mp").animate({ top: -193 }, { duration: 200, complete: function () {  $("#"+pickerid+"_mp").hide(); } });
         __WriteDays__(pickerid,options);
         return false;
 	}
-	function __MPCancel(e,pickerid,options){
+	function __MPCancel__(e,pickerid,options){
 		$("#"+pickerid+"_mp").animate({ top: -193 }, { duration: 200, complete: function () {  $("#"+pickerid+"_mp").hide(); } });
         return false;
 	}
@@ -339,7 +331,7 @@
 	}
 	function __WriteDays__(pickerid,options){
 	 	var tb = $("#"+pickerid+"_inner tbody");
-        $("#"+pickerid+"_ymbtn").html(options.monthName[def.Month - 1] + options.monthp + " " + options.Year);
+        $("#"+pickerid+"_ymbtn").html(options.monthName[options.Month - 1] + options.monthp + " " + options.Year);
         var firstdate = new Date(options.Year, options.Month - 1, 1);
 
         var diffday = options.weekStart - firstdate.getDay();
@@ -350,7 +342,8 @@
         var startdate = DateAdd("d", diffday, firstdate);
         var enddate = DateAdd("d", 42, startdate);    
         var bhm = [];
-        var ads = ade = null; //限制条件
+        var ads = options.ads;
+		var ade = options.ade;
         var tds = options.today.Format("yyyy-MM-dd");
         var indate = options.indate;
         var ins = indate != null ? indate.Format("yyyy-MM-dd") : "";
@@ -409,12 +402,12 @@
             var d = new Date(arrs[0], parseInt(arrs[1], 10) - 1, arrs[2]);
             if (options.showtime) {
                 var timevalue = $("#"+pickerid+"_time").val();
-                if (!/\d{2}:\d{2}:\d{2}/.test(timevalue)) {
-                    timevalue = "00:00:00";
+                if (!/\d{2}:\d{2}/.test(timevalue)) {
+                    timevalue = "00:00";
                 }
                 var arrtime = timevalue.split(":");
-                if (arrtime.length == 3) {
-                    d.setHours(arrtime[0], arrtime[1], arrtime[2]);
+                if (arrtime.length == 2) {
+                    d.setHours(arrtime[0], arrtime[1], 0);
                 }
             }
             __ReturnDate__(d,pickerid,options);
@@ -425,12 +418,12 @@
 		var d = new Date();
         if (options.showtime) {
             var timeshow = $("#"+pickerid+"_time").val();
-            if (!/\d{2}:\d{2}:\d{2}/.test(timeshow)) {
-                timeshow = "00:00:00";
+            if (!/\d{2}:\d{2}/.test(timeshow)) {
+                timeshow = "00:00";
             }
             var arrtime = timeshow.split(":");
-            if (arrtime.length == 3) {
-                d.setHours(arrtime[0], arrtime[1], arrtime[2]);
+            if (arrtime.length == 2) {
+                d.setHours(arrtime[0], arrtime[1], 0);
             }
         }       
         __ReturnDate__(d,pickerid,options);
@@ -440,8 +433,8 @@
             re.call(options.el, rdate);
         }
         else {
-            var formart = options.showtime ? "yyyy-MM-dd HH:mm:ss" : "yyyy-MM-dd";
-            ct.val(rdate.Format(formart));
+            var formart = options.showtime ? "yyyy-MM-dd HH:mm" : "yyyy-MM-dd";
+            options.el.val(rdate.Format(formart));
         }     
         $("#"+pickerid).css("visibility", "hidden"); 
 	}
@@ -467,11 +460,96 @@
 		return null;
 	}
 	xjDatepicker.prototype = {
-		Show:function(target,aaa){
+		Show:function(){
+			var self = this ;
+			var cp = $("#"+this.pickerid);
+			if (cp.css("visibility") == "visible") {
+                cp.css(" visibility", "hidden");
+            }
+			var v = this.el.val();
+            var dateReg = this.options.showtime ? /^(\d{1,4})(-|\/|.)(\d{1,2})\2(\d{1,2})\040+(\d{1,2}):(\d{1,2})$/ : /^(\d{1,4})(-|\/|.)(\d{1,2})\2(\d{1,2})$/;
+            if (v != "") {
+                v = v.match(dateReg);
+            }
 
+            if (v == null || v == "") {
+                var now = new Date();
+                this.options.Year = now.getFullYear();
+                this.options.Month = now.getMonth() + 1;
+                this.options.Day = now.getDate();
+                this.options.Hour = now.getHours();
+                this.options.Minute = now.getMinutes();
+                this.options.Second = now.getSeconds();
+                this.options.inputDate = null;
+                if (this.options.showtime) {
+                    $("#"+this.pickerid+"_time").val("00:00");
+                }
+            }
+            else {
+                this.options.Year = parseInt(v[1], 10);
+                this.options.Month = parseInt(v[3], 10);
+                this.options.Day = parseInt(v[4], 10);
+                if (this.options.showtime) {
+                    this.options.Hour = parseInt(v[5], 10);
+                    this.options.Minute = parseInt(v[6], 10);
+                    this.options.Second = 0;
+                    this.options.indate = new Date(this.options.Year, this.options.Month - 1, this.options.Day, this.options.Hour, this.options.Minute, this.options.Second);
+                    $("#"+this.pickerid+"_time").val(this.options.indate.Format("HH:mm"));
+
+                }
+                else {
+                    this.options.indate = new Date(this.options.Year, this.options.Month - 1, this.options.Day);
+                }
+
+            }
+            this.options.ads = this.options.ade = null;
+
+         	if (this.options.applyrule && $.isFunction(this.options.applyrule)) {
+                var rule = this.options.applyrule.call(this.el, this.elid);
+                if (rule) {
+                    if (rule.startdate) {
+                        this.options.ads = rule.startdate ;
+                    }                   
+                    if (rule.enddate) {
+                    	this.options.ade = rule.enddate ;                        
+                    }                   
+                }
+            }           
+            __WriteDays__(this.pickerid,this.options);
+
+            $("#"+this.pickerid+"_t").height(cp.height());
+            var t = this.options.showtarget || this.el;
+            var pos = t.offset();
+
+
+            var height = t.outerHeight();
+            var newpos = { left: pos.left, top: pos.top + height };
+            var w = cp.width();
+            var h = cp.height();
+            var bw = document.documentElement.clientWidth;
+            var bh = document.documentElement.clientHeight;
+            if ((newpos.left + w) >= bw) {
+                newpos.left = bw - w - 2;
+            }
+            if ((newpos.top + h) >= bh) {
+                newpos.top = pos.top - h - 2;
+            }
+            if (newpos.left < 0) {
+                newpos.left = 10;
+            }
+            if (newpos.top < 0) {
+                newpos.top = 10;
+            }
+            $("#"+this.pickerid+"_mp").hide();
+            newpos.visibility = "visible";
+            cp.css(newpos);
+
+			$(document).one("click",function(){
+				self.Hide.call(self);
+			});
 		},
 		Hide:function(){
-
+			$("#"+this.pickerid).css("visibility","hidden");
 		}
 	};
 	window.xjDatepicker = xjDatepicker ;

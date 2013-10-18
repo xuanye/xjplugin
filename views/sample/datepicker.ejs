@@ -2,6 +2,22 @@
 <html>
 	<head>
 		<%include ../header%>
+		<link rel="stylesheet" href="/css/plugin/xjdatepicker.css" media="screen" type="text/css"/>
+		<style type="text/css">
+		.picker
+		{
+			height: 16px;
+			width: 16px;
+			background: url("/img/icon/cal.png") no-repeat left top;
+			margin-left: -19px;
+			margin-top: -10px;
+			cursor: pointer;
+			border: none;
+		    z-index: 88;
+		}
+
+		</style>
+	</head>
 	</head>
 	<body>
 		<%include ../toper%>
@@ -15,12 +31,72 @@
 		      <div class="codep"><code>&lt;script src="js/plugin/xjdatepicker.js" type="text/javascript"&gt;&lt;/script&gt;</code></div>
 		    </div>
 		    <h5>1. 默认的日期选择框</h5>
-		    <div style="margin-top:20px;">		     
+		    <div style="margin-top:10px;">
+		   		<input type="text" id="dptext1"/>		     
 		    </div>
-		    <h5>2. 带有时间选择的日期选择框</h5>
-		    <div style="margin-top:20px;">		    
+		    <code>new xjDatepicker("dptext1",{ picker:"&lt;img src='/img/icon/s.gif' class='picker' alt='选择'/&gt;" });</code>
+
+		    <h5>2. 带有时间的日期选择框</h5>
+		    <div style="margin-top:10px;">	
+		    	<input type="text" id="dptext2"/>		 	    
 		    </div>
+			<code>new xjDatepicker("dptext2",{ showtime:true,picker:"&lt;img src='/img/icon/s.gif' class='picker' alt='选择'/&gt;" });</code>
+		    <h5>3. 设置日期选择区间</h5>
+		    <div style="margin-top:10px;">	
+		    	<input type="text" id="dptext3"/>	至	<input type="text" id="dptext4"/>	 	    
+		    </div>
+		    <pre><code>new xjDatepicker("dptext3",{
+	applyrule:function(id) { //设置必须选择今天之后一个月之内的日期
+			var today = new Date();	
+			var oneMafter = new Date();
+			oneMafter.setMonth(oneMafter.getMonth() + 1)  
+			return {startdate:today,enddate:oneMafter};
+		}, 
+	picker:"&lt;img src='/img/icon/s.gif' class='picker' alt='选择'/&gt;" 
+});
+new xjDatepicker("dptext4",{ 
+	applyrule:function(){ // 设置只能选择开始日期之后的日期
+	var v = $("#dptext3").val();
+	var arrV = v.split("-");
+	if(arrV.length ==3){
+		return {startdate:new Date(parseInt(arrV[0]),parseInt(arrV[1])-1,parseInt(arrV[2]))}
+	}
+	return null;
+	},
+	picker:"&lt;img src='/img/icon/s.gif' class='picker' alt='选择'/&gt;" 
+});</code></pre>
+			
 		</div>
 		<%include ../bottomer%>
+		<script src="/js/plugin/xjdatepicker.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			new xjDatepicker("dptext1",{ picker:"<img src='/img/icon/s.gif' class='picker' alt='选择'/>" });
+			new xjDatepicker("dptext2",{showtime:true,picker:"<img src='/img/icon/s.gif' class='picker' alt='选择'/>" });
+
+
+			new xjDatepicker("dptext3",{
+				applyrule:function(id) { //设置必须选择今天之后一个月之内的日期
+							var today = new Date();	
+							var oneMafter = new Date();
+							oneMafter.setMonth(oneMafter.getMonth() + 1)  
+							return {startdate:today,enddate:oneMafter};
+						}, 
+				picker:"<img src='/img/icon/s.gif' class='picker' alt='选择'/>" 
+			});
+
+			new xjDatepicker("dptext4",{ 
+				applyrule:function(){ // 设置只能选择开始日期之后的日期
+					var v = $("#dptext3").val();
+					var arrV = v.split("-");
+					if(arrV.length ==3){
+						return {startdate:new Date(parseInt(arrV[0]),parseInt(arrV[1])-1,parseInt(arrV[2]))}
+					}
+					return null;
+				},
+				picker:"<img src='/img/icon/s.gif' class='picker' alt='选择'/>" });
+
+		
+
+		</script>
 	</body>
 </html>

@@ -15,7 +15,7 @@ exports.dailog_i_2 = function(req, res){
   res.render('sample/dailog_i', { title: 'xjplugin-xjIframeDailog示例程序',type:2});
 };
 
-exports.datepicker =  function(req, res){
+exports.xjdatepicker =  function(req, res){
   res.render('sample/datepicker', { title: 'xjplugin-datepicker示例程序',view:"sample"});
 };
 
