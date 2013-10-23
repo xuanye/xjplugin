@@ -1,12 +1,9 @@
-# 设置语言
 language: node_js
 
-# 设置需要编译的版本环境
 node_js:
 - '0.10'
 - '0.8'
 
-# 设置部署环境
 deploy:
   provider: openshift
   user: redhu@126.com
