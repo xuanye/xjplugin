@@ -1,4 +1,18 @@
+# 设置语言
 language: node_js
+
+# 设置需要编译的版本环境
 node_js:
-  - "0.10"
-  - "0.8"
+- '0.10'
+- '0.8'
+
+# 设置部署环境
+deploy:
+  provider: openshift
+  user: redhu@126.com
+  password:
+    secure: MqNTCx4mNdFbTFBb8UVWnh5lnDDMQFOEkzG70ltUsLfzKjzvCcrQXQg50KJqEak31iFmDYKNKfZpDgvHr0K+SnXVJfHE5OB4nj9VVu5eMuBWy0nU8F3nqn0lLDUOANUjDJgiHt2KW8XSfNsEsiqyTriEy98luiUemE1zUKAFRkw=
+  app: xjplugin
+  domain: xjplugin-xuanye.rhcloud.com
+  on:
+    repo: xuanye/xjplugin
