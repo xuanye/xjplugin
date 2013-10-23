@@ -4,11 +4,7 @@ node_js:
 - '0.10'
 
 deploy:
-  provider: openshift
-  user: redhu@126.com
-  password:
-    secure: MqNTCx4mNdFbTFBb8UVWnh5lnDDMQFOEkzG70ltUsLfzKjzvCcrQXQg50KJqEak31iFmDYKNKfZpDgvHr0K+SnXVJfHE5OB4nj9VVu5eMuBWy0nU8F3nqn0lLDUOANUjDJgiHt2KW8XSfNsEsiqyTriEy98luiUemE1zUKAFRkw=
-  app: xjplugin
-  domain: xuanye
-  on:
-    repo: xuanye/xjplugin
+  provider: heroku
+  app: xjplugin # optional if it's the same as your repo name
+  api_key: "dd0731c8-cc14-4bda-8b04-25f376e91104"
+
