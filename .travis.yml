@@ -2,7 +2,6 @@ language: node_js
 
 node_js:
 - '0.10'
-- '0.8'
 
 deploy:
   provider: openshift
@@ -10,6 +9,6 @@ deploy:
   password:
     secure: MqNTCx4mNdFbTFBb8UVWnh5lnDDMQFOEkzG70ltUsLfzKjzvCcrQXQg50KJqEak31iFmDYKNKfZpDgvHr0K+SnXVJfHE5OB4nj9VVu5eMuBWy0nU8F3nqn0lLDUOANUjDJgiHt2KW8XSfNsEsiqyTriEy98luiUemE1zUKAFRkw=
   app: xjplugin
-  domain: xjplugin-xuanye.rhcloud.com
+  domain: xuanye
   on:
     repo: xuanye/xjplugin
