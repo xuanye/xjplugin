@@ -10,4 +10,4 @@ xjplugin是一些基于jquery的客户端插件，包括
 该项目使用 Travis CI 作为持续集成的工具 [![构建状态](https://travis-ci.org/xuanye/xjplugin.png?branch=master)](https://travis-ci.org/xuanye/xjplugin)
 
 
-并自动部署到Heroku [xjplugin.herokuapp.com](http://xjplugin.herokuapp.com) ,不过你要知道它的访问速度那真的是...你得有些耐心
+可以通过这个地址访问[http://xjplugin.tk/](http://xjplugin.tk/) 
