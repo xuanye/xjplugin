@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+	<head>
+		<link rel="stylesheet" href="/css/desktop.css" media="screen" type="text/css">
+		<link rel="stylesheet" href="/css/plugin/xjtabpanel.css" media="screen" type="text/css">
+		<link rel="stylesheet" href="/css/plugin/xjtree.css" media="screen" type="text/css">
+		<title><%=title%></title>
+		<style type="text/css">
+		.icon_home{
+			background-image:url("/img/icon/home.png");
+		}
+		</style>
+	</head>
+	<body>	
+		<div class="main-panel">
+	        <div id="top" class="top">
+	           <span class="logotitle">你的系统名称</span>
+	           <span class="welcome">欢迎您，管理员同志 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class='normal'><span class='logout'>注销</span></a></span>
+	        </div>
+	        <div id="left" class="left" style="width:185px;top:43px;left:5px;">
+	            <div id="panel-header" class="x-panel-header" >              
+	                 <span class="menupanel">
+	                    系统菜单
+	                 </span>
+	            </div>
+	            <div class="x-panel-bwrap">
+	                <div id="panel-wrap" class="x-panel-body">                    
+	                    <div id="treepanel" class="menutree">
+	                    <!--menu tree -->
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	        <div id="tab-container" class="x-tab-panel x-border-panel" style="left:195px;top:43px;">
+	        </div>
+	        <div id="panel-bottom"></div>
+    	</div>
+	  	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js" type="text/javascript"></script>
+	  	<script src="/js/plugin/xjtree.js" type="text/javascript"></script>
+	  	<script src="/js/plugin/xjtabpanel.js" type="text/javascript"></script>
+	  	<script type="text/javascript">
+		//菜单数据 ，实际情况可配置为空并从后台获取，详见xjtree控件的使用
+		var menudata=[
+			{"id":"1","text":"系统管理","value":"","showcheck":false,"isexpand":true,"checkstate":0,"hasChildren":true,"complete":true,"classes":null,"data":null,"ChildNodes":[
+					{"id":"1.1","text":"用户管理","value":"/QManage/QPaperList.do","showcheck":false,"isexpand":false,"checkstate":0,"hasChildren":false,"complete":true,"classes":null,"data":null,"ChildNodes":[]},
+					{"id":"1.2","text":"机构管理","value":"/QManage/APaperList.do","showcheck":false,"isexpand":false,"checkstate":0,"hasChildren":false,"complete":true,"classes":null,"data":null,"ChildNodes":[]},
+					{"id":"1.3","text":"角色管理","value":"/QManage/APaperList.do","showcheck":false,"isexpand":false,"checkstate":0,"hasChildren":false,"complete":true,"classes":null,"data":null,"ChildNodes":[]},
+					{"id":"1.4","text":"权限管理","value":"/QManage/APaperList.do","showcheck":false,"isexpand":false,"checkstate":0,"hasChildren":false,"complete":true,"classes":null,"data":null,"ChildNodes":[]},
+					{"id":"1.5","text":"日志管理","value":"/QManage/APaperList.do","showcheck":false,"isexpand":false,"checkstate":0,"hasChildren":false,"complete":true,"classes":null,"data":null,"ChildNodes":[]}
+				]
+			}
+		];
+
+	  	jQuery(document).ready(function($) {
+	  		
+			var mainh = document.documentElement.clientHeight;
+			var mainw = document.documentElement.clientWidth;
+			var panelheader = $("#panel-header").outerHeight();
+			var header = 43;
+			var bottom = 3;
+
+			var op = { data: menudata, onnodeclick: navi };
+
+			new xjTree("treepanel",op);			
+			var tabo = {};
+			tabo.items = [{ id: "home", text: "主页", classes: "icon_home", isactive: true, content: "<div style='padding:10px;font-size:16px;'>欢迎光临!，这个示例是一个系统的框架程序，可以在主区域通过tabpanl打开多个页面，左侧是菜单树</div>"}];
+			tabo.width = mainw - 196;
+			tabo.height = mainh - header - bottom-1;
+
+			var tab = new xjTabPanel("tab-container",tabo);
+
+			function navi(item) {
+			if (item.value) {
+			    tab.OpenTabItem({ id: idreplace(item.id), text: item.text, url: item.value, isactive: true, closeable: true }, true);
+			}
+			else {
+			    item.expand();
+			}
+			}
+			function idreplace(id) {
+				return id.replace(/[^a-zA-Z\d_]/ig, "_")
+			}
+			setpanelsize();
+			function setpanelsize() {
+				mainh = document.documentElement.clientHeight;
+				mainw = document.documentElement.clientWidth;
+				var h = mainh - header - panelheader - bottom;
+				var w = mainw - 196;
+				$("#panel-wrap").height(h);
+				$("#tab-container").width(w);
+			}
+			$(window).resize(window_resize);
+			function window_resize() {
+				setpanelsize();
+				tab.ResizeTabPanel(mainw - 196, mainh - header - bottom-1);
+			}
+	  	});
+	  	</script>
+	</body>
+</html>

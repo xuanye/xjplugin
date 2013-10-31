@@ -19,6 +19,16 @@ exports.xjdatepicker =  function(req, res){
   res.render('sample/datepicker', { title: 'xjplugin-datepicker示例程序',view:"sample"});
 };
 
+exports.xjtabpanel =  function(req, res){
+  res.render('sample/xjtabpanel', { title: 'xjplugin-xjtabpanel示例程序',view:"sample"});
+};
+
+exports.desktop =  function(req, res){
+  res.render('sample/desktop', { title: 'xjplugin-工作台示例程序'});
+};
+
+
+
 exports.doquerytree = function(req, res){
    var pid = req.body.id ;
    var ptext = decodeURIComponent(req.body.text);

@@ -61,7 +61,7 @@
             }
         }
         else {           
-            this.__asnyloadc__(null, false, function(data) {
+            __AsnyLoad__(null, false,options, function(data) {
                 options.preloadcomplete && options.preloadcomplete();
                 if (data && data.length > 0) {
                     options.parsedata && options.parsedata(data);                       

@@ -1,0 +1,117 @@
+body,h1,h2,h3,h4,h5,h6,hr,div,p,blockquote,dl,dt,dd,ul,ol,li,pre,fieldset,lengend,input,textarea,form,th,td{margin:0;padding:0;}
+body,select,textarea,th,td{font-size:12px; font-family:"微软雅黑","宋体",Helvetica,Arial,simsun;}
+h1,h2,h3,h4,h5,h6{font-size:100%;}
+/*table{border-collapse:collapse;border-spacing:0;}*/
+code,kbd,pre,samp,tt{font-family:"Courier New",Courier,monospace;}
+caption,th{ text-align:left;}
+small{font-size:100%;}
+dl,dt,dd,ul,ol,li{list-style:none;}
+a{text-decoration:none;}
+abbr,acronym{border:0;font-variant:normal;}
+abbr[title],acronym[title]{border-bottom:1px dotted;cursor:help;}
+q:before,q:after{content:'';}
+/*:focus{outline:0;}*/
+fieldset{border:none;}
+address,caption,cite,code,dfn,em,strong,th,var,optgroup{font-style:inherit;}
+input,button,textarea,select,optgroup,option{font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit; outline:none;}
+input,button,textarea,select{*font-size:100%; outline:none;resize:none;}
+button::-moz-focus-inner {  border:none; }
+sup{vertical-align:baseline;}
+sub{vertical-align:baseline;}
+hr{border:none;height:0;visibility:hidden;}
+img{ -ms-interpolation-mode:bicubic; border:none; vertical-align:middle;}
+textarea{ overflow-y: scroll}
+object,embed{ outline:none;}
+figure{margin:0;}
+html{ background:#FFF;}
+body{ color:#555; background:#FFF;margin:0px;padding:0px;overflow:hidden;}
+.main-panel
+{
+  background:#fdfdfd;
+  margin:0px;
+  padding:0px;
+  height:100%;
+  width:100%;
+  position:absolute;
+}
+.top
+{
+    height:38px;
+    background:#4e4d77; 
+    color:#FFF;
+    padding:0px 4px 0px 10px;
+    line-height:38px;
+    border-bottom: 2px solid #555;
+}
+.left
+{
+    position:absolute;
+    left:0px;
+    top:0px;      
+}
+.welcome
+{
+	float:right;
+	margin-right:20px;
+	padding-left:20px;
+	background:url("../img/icon/user.png") no-repeat left center;
+}
+.logotitle
+{
+	float:left;
+	font-size:18px;
+	margin:0px 10px;
+}
+a.normal
+{
+	color:#fff;
+	text-decoration:underline;
+}
+
+.x-panel-header
+{  
+    ZOOM: 1; 
+    FONT: bold 11px/15px tahoma, arial, verdana, sans-serif; 
+    BACKGROUND: url("../img/subnav.jpg") repeat-x 0px -1px; 
+    COLOR: #333; 
+    OVERFLOW: hidden; 
+    BORDER: #ccc 1px solid; 
+    PADDING:7px 3px 6px 5px;
+    text-indent:15px;
+    font-weight:bold;
+}
+
+.x-panel-bwrap {
+	ZOOM: 1; OVERFLOW: hidden; TOP: 0px; LEFT: 0px
+}
+.x-panel-body {
+	ZOOM: 1; OVERFLOW: hidden;
+	background:#fff;
+	position:relative;
+	border:#ccc 1px solid;
+	border-top:none;
+	overflow:auto;
+}
+.x-panel-body .menutree
+{
+  margin:5px 5px 3px 5px;  
+}
+.x-tab-panel {
+	OVERFLOW: hidden
+}
+.x-border-panel {
+	POSITION: absolute; TOP: 0px; LEFT: 0px
+}
+.x-unselectable, .x-unselectable * {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select:ignore;
+}
+.x-panel-noborder,.x-panel-body-noborder
+{
+  border:none;
+}
+.x-tab-fullscreen-a
+{
+  display:none;    
+}
