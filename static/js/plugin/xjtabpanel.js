@@ -31,7 +31,7 @@
             __BuildItemLiHtml__(item, litemp,options);
         }
         if (options.items.length >= options.showcloseall) {
-            __BuildCloseAllBTNHtml__(litemp);
+            __BuildCloseAllBTNHtml__(litemp,options);
         }
         litemp.push("<li class='x-tab-edge'/><div class='x-clear'></div>");
 
@@ -365,7 +365,7 @@
                 var cabtn = $("#tab_li_closeall_"+ options.elid);
                 if (cabtn.length == 0) {
                     var cabtntmp = [];
-                    __BuildCloseAllBTNHtml__(cabtntmp);
+                    __BuildCloseAllBTNHtml__(cabtntmp,options);
                     li.after(cabtntmp.join(""));
                     $("#tab_li_closeall_"+ options.elid).click(function(){__CloseAllItem__(options)});
                 }
@@ -395,7 +395,7 @@
         if (!confirm("你确认要关闭所有选项卡吗？")) {
             return;
         }
-        ulwrap.find("li").remove(".x-tab-strip-closable"); //移除所有可以关闭的tab项
+        options.ulwrap.find("li").remove(".x-tab-strip-closable"); //移除所有可以关闭的tab项
         var t = [];
         var nid = "";
         for (var i = 0, j = options.items.length; i < j; i++) {
