@@ -455,13 +455,13 @@
             __AddTabitem__(item,this.options);
         },
         OpenTabItem:function(item,orAdd){
-            __OpenItemOrAdd__(item,orAdd,this.options)
+            __OpenItemOrAdd__(item,orAdd,this.options);
         },
         ResizeTabPanel:function(width,height){
-            __Resize__(width,height,this.options)
+            __Resize__(width,height,this.options);
         },
         SetDisableTabItem:function(itemId, disabled){
-            __SetDisableTabItem__(itemId,disabled,this.options)
+            __SetDisableTabItem__(itemId,disabled,this.options);
         }
     };
   	window.xjTabPanel = xjTabPanel ;

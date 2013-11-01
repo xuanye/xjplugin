@@ -186,32 +186,32 @@
 
 /****************************/
 .xj-tree-node-expanded .xj-tree-node-icon{
-	background-image:url(../../img//plugin/tree/folder-open.gif);
+	background-image:url(../../img/plugin/tree/folder-open.gif);
 }
 
 .xj-tree-node-leaf .xj-tree-node-icon{
-	background-image:url(../../img//plugin/tree/leaf.png);
+	background-image:url(../../img/plugin/tree/leaf.png);
 }
 
 .xj-tree-node-collapsed .xj-tree-node-icon{
-	background-image:url(../../img//plugin/tree/folder.gif);
+	background-image:url(../../img/plugin/tree/folder.gif);
 }
 
 .xj-tree-node-group  .xj-tree-node-icon{
-	background-image:url(../../img//plugin/tree/group.gif);
+	background-image:url(../../img/plugin/tree/group.gif);
 }
 
 .menutree .xj-tree-node-expanded .xj-tree-node-icon{
-	background-image:url(../../img//plugin/tree/mfolder-open.gif);
+	background-image:url(../../img/plugin/tree/mfolder-open.gif);
 }
 
 .menutree .xj-tree-node-collapsed .xj-tree-node-icon{
-	background-image:url(../../img//plugin/tree/mfolder.gif);
+	background-image:url(../../img/plugin/tree/mfolder.gif);
 }
 
 
 .xj-tree-node-loading .xj-tree-node-icon{
-	background-image:url(../../img//plugin/tree/loading.gif) !important;
+	background-image:url(../../img/plugin/tree/loading.gif) !important;
 }
 
 .xj-tree-node .xj-tree-node-inline-icon {
@@ -224,66 +224,66 @@
 }
 .xj-tree-lines .xj-tree-icon
 {
-    background-image:url(../../img//plugin/tree/elbow-line.gif);
+    background-image:url(../../img/plugin/tree/elbow-line.gif);
 }
 .xj-tree-lines .xj-tree-elbow{
-	background-image:url(../../img//plugin/tree/elbow.gif);
+	background-image:url(../../img/plugin/tree/elbow.gif);
 }
 
 .xj-tree-lines .xj-tree-elbow-plus{
-	background-image:url(../../img//plugin/tree/elbow-plus.gif);
+	background-image:url(../../img/plugin/tree/elbow-plus.gif);
 }
 
 .xj-tree-lines .xj-tree-elbow-minus{
-	background-image:url(../../img//plugin/tree/elbow-minus.gif);
+	background-image:url(../../img/plugin/tree/elbow-minus.gif);
 }
 
 .xj-tree-lines .xj-tree-elbow-end{
-	background-image:url(../../img//plugin/tree/elbow-end.gif);
+	background-image:url(../../img/plugin/tree/elbow-end.gif);
 }
 
 .xj-tree-lines .xj-tree-elbow-end-plus{
-	background-image:url(../../img//plugin/tree/elbow-end-plus.gif);
+	background-image:url(../../img/plugin/tree/elbow-end-plus.gif);
 }
 
 .xj-tree-lines .xj-tree-elbow-end-minus{
-	background-image:url(../../img//plugin/tree/elbow-end-minus.gif);
+	background-image:url(../../img/plugin/tree/elbow-end-minus.gif);
 }
 
 .xj-tree-lines .xj-tree-elbow-line{
-	background-image:url(../../img//plugin/tree/elbow-line.gif);
+	background-image:url(../../img/plugin/tree/elbow-line.gif);
 }
 
 .xj-tree-no-lines .xj-tree-elbow-plus{
-	background-image:url(../../img//plugin/tree/elbow-plus-nl.gif);
+	background-image:url(../../img/plugin/tree/elbow-plus-nl.gif);
 }
 
 .xj-tree-no-lines .xj-tree-elbow-minus{
-	background-image:url(../../img//plugin/tree/elbow-minus-nl.gif);
+	background-image:url(../../img/plugin/tree/elbow-minus-nl.gif);
 }
 
 .xj-tree-no-lines .xj-tree-elbow-end-plus{
-	background-image:url(../../img//plugin/tree/elbow-end-plus-nl.gif);
+	background-image:url(../../img/plugin/tree/elbow-end-plus-nl.gif);
 }
 
 .xj-tree-no-lines .xj-tree-elbow-end-minus{
-	background-image:url(../../img//plugin/tree/elbow-end-minus-nl.gif);
+	background-image:url(../../img/plugin/tree/elbow-end-minus-nl.gif);
 }
 
 .xj-tree-arrows .xj-tree-elbow-plus{
-    background-image:url(../../img//plugin/tree/arrows.gif);
+    background-image:url(../../img/plugin/tree/arrows.gif);
 }
 
 .xj-tree-arrows .xj-tree-elbow-minus{
-    background-image:url(../../img//plugin/tree/arrows.gif);
+    background-image:url(../../img/plugin/tree/arrows.gif);
 }
 
 .xj-tree-arrows .xj-tree-elbow-end-plus{
-    background-image:url(../../img//plugin/tree/arrows.gif);
+    background-image:url(../../img/plugin/tree/arrows.gif);
 }
 
 .xj-tree-arrows .xj-tree-elbow-end-minus{
-    background-image:url(../../img//plugin/tree/arrows.gif);
+    background-image:url(../../img/plugin/tree/arrows.gif);
 }
 
 
@@ -291,7 +291,7 @@
 	margin-top: 2px;
 	height: 14px;	
 	width: 14px;
-    background-image:url(../../img//plugin/tree/arrows.png);
+    background-image:url(../../img/plugin/tree/arrows.png);
     background-position:-12px -12px;   
 }
 
@@ -299,7 +299,7 @@
 	height: 14px;	
 	width: 14px;
 	margin-top: 2px;
-    background-image:url(../../img//plugin/tree/arrows.png);
+    background-image:url(../../img/plugin/tree/arrows.png);
     background-position:-12px 0px;
 }
 
@@ -307,7 +307,7 @@
 	height: 14px;	
 	width: 14px;
 	margin-top: 2px;
-    background-image:url(../../img//plugin/tree/arrows.png);
+    background-image:url(../../img/plugin/tree/arrows.png);
     background-position:-12px -12px;   
 }
 
@@ -315,7 +315,7 @@
 	height: 12px;	
 	width: 14px;
 	margin-top: 2px;
-    background-image:url(../../img//plugin/tree/arrows.png);
+    background-image:url(../../img/plugin/tree/arrows.png);
     background-position:-12px 0px;
 }
 

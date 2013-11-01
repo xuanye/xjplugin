@@ -2,17 +2,102 @@
 <html>
 	<head>
 		<%include header%>
+		<style type="text/css">
+			.picpanel{
+				padding: 2px;
+				border: solid 1px #ccc;
+				text-align: center;				
+			}
+			.contentpanel{
+				margin: 5px;
+				padding: 4px;				
+			}
+			.linkpanel{
+				padding-left:24px;
+			}
+			.topicpanel{
+			}
+		</style>
 	</head>
 	<body>
 		<%include toper%>
 		<div class="container">
-			<h4> 首页还没做好呢！ </h4>
-			<div>
-				<a href="/sample/xjtree">xjtree</a> |
-				<a href="/sample/xjdatepicker">xjdatepicker</a> |
-				<a href="/sample/dailog">xjiframedailog</a> |
-				<a href="/sample/xjtabpanel">xjtabpanel</a> |
+			<div class="topicpanel">
+				<h3>xjPlugin 是一些基于jQuery的客户端插件，各自独立，调用方便，且易于扩展!</h3>
 			</div>
+			<hr/>
+			<h4 class="text-info">1. xjtree --客户端树</h4>
+			<div class="row-fluid">				
+				<div class="span3">
+					<div class="picpanel"><img src="/data/xjtree.jpg" alt=""/></div>
+				</div>
+				<div class="span9">
+					<div class="contentpanel">
+						<ul>
+							<li>支持静态的树，即一次性将全部数据加载到客户端</li>
+							<li>支持异步的树，需要数据时通过ajax到服务端获取</li>
+							<li>支持在需要时自定义获取获取数据的方式</li>
+							<li>支持三态的checkbox选择，支持级联选择</li>
+							<li>支持本地异步生成，支持大数据量，性能表现优异</li>
+							<li>兼容主流浏览器</li>
+						</ul>
+					</div>
+					<div class="linkpanel"><a href="/api/xjtree"  target="_blank">文档</a> | <a href="/sample/xjtree" target="_blank">示例</a> </div>
+				</div>
+			</div>
+			<hr/>
+			<h4 class="text-info">2. xjdatepicker -- 日期和时间选择器</h4>
+			<div class="row-fluid">				
+				<div class="span3">
+					<div class="picpanel"><img src="/data/xjdatepicker.jpg" alt=""/></div>
+				</div>
+				<div class="span9">
+					<div class="contentpanel">
+						<ul>
+							<li>支持日期选择</li>
+							<li>支持日期加时间选择</li>		
+							<li>支持设置选择范围</li>					
+						</ul>
+					</div>
+					<div class="linkpanel"><a href="/api/xjdatepicker"  target="_blank">文档</a> | <a href="/sample/xjdatepicker" target="_blank">示例</a> </div>
+				</div>
+			</div>
+			<hr/>
+			<h4 class="text-info">3. xjiframedailog 内嵌iframe的模态窗口</h4>
+			<div class="row-fluid">				
+				<div class="span3">
+					<div class="picpanel"><img src="/data/xjiframedailog.jpg" alt=""/></div>
+				</div>
+				<div class="span9">
+					<div class="contentpanel">
+						<ul>
+							<li>带边框的模态窗口</li>
+							<li>无边框的模态窗口</li>
+						</ul>
+					</div>
+					<div class="linkpanel"><a href="/api/dailog"  target="_blank">文档</a> | <a href="/sample/dailog" target="_blank">示例</a> </div>
+				</div>
+			</div>
+			<hr/>
+			<h4 class="text-info">4. xjtabpanel 选项卡控件</h4>
+			<div class="row-fluid">				
+				<div class="span3">
+					<div class="picpanel"><img src="/data/xjtabpanel.jpg" alt=""/></div>
+				</div>
+				<div class="span9">
+					<div class="contentpanel">
+						<ul>
+							<li>支持直接内容，支持自定义函数内容，支持iframe内容</li>
+							<li>支持设置禁用和禁止关闭</li>
+							<li>支持全部关闭按钮</li>
+							<li>支持足够多的选项卡同时存在。</li>
+						</ul>
+					</div>
+					<div class="linkpanel">
+						<a href="/api/xjtabpanel"  target="_blank">文档</a> | <a href="/sample/xjtabpanel" target="_blank">示例</a> 
+					</div>
+				</div>
+			</div>			
 		</div>
 		<%include bottomer%>
 	</body>
