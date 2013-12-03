@@ -1,6 +1,5 @@
 ﻿//依赖 jquery 1.2.6+
 ;(function(window,undefined,$){
-
     //扩展jquery的方法
     $.fn.swapClass = function(c1, c2) {
         return this.removeClass(c1).addClass(c2);
@@ -261,11 +260,18 @@
         }   
     }
 
-    function __ExpandNode__(treeid){       
+    function __ExpandNode__(treeid,onlydoplus){       
         var item = this;  
         var nid = item.id.replace(/[^\w]/gi, "_");
         var img = $("#" + treeid + "_" + nid + " img.xj-tree-ec-icon");
         if (img.length > 0) {
+            if(onlydoplus)
+            {
+                if(img.hasClass("xj-tree-elbow-minus") || img.hasClass("xj-tree-elbow-end-minus") )  
+                {
+                    return false;
+                } 
+            }
             img.click();
         }
     }
@@ -356,6 +362,57 @@
             return false;
         }
     }
+    function __LocateNodeById__(teedata,treeid,sid, options){
+        //step1:找到该节点
+        var item = __SearchById__(sid,null,teedata);
+        if(item){ //节点找到了。。        
+            //确保所有父祖节点都是展开的，注：展开的自然是已经输出过了
+            var arrPath = [];           
+            var p = item;
+            while(p){
+                arrPath.push(p);
+                p = p.parent;
+            }
+            //step2 依次展开节点
+            for(var i=arrPath.length-1;i>=0;i--){
+                //展开节点
+                __ExpandNode__.call(arrPath[i],treeid,true);
+            }
+            //设置当前节点          
+            if (options.citem) {
+                var nid = options.citem.id.replace(/[^\w]/gi, "_");
+                $("#" + treeid + "_" + nid).removeClass("xj-tree-selected");
+            }
+            options.citem = item;
+            $("#"+treeid+"_"+sid.replace(/[^\w]/gi, "_")).addClass("xj-tree-selected");
+            return true;
+        }
+        else{
+            return false;//节点未找到
+        }
+    }    
+    function __SearchById__(sid,pitem,list){
+        if(list !=null && list.length>0){
+            //先判断List第一层中是否存在
+            for(var i =0,l=list.length ;i<l;i++)
+            {
+                list[i].parent = pitem; //便于输出
+                if( list[i].id == sid){ //找到的匹配
+                    return list[i];
+                }
+            }
+            //先判断调用下一层
+            for(var i =0,l=list.length ;i<l;i++)
+            {
+               var res = __SearchById__(sid,list[i],list[i].ChildNodes);
+               if(res)
+               {
+                  return res;
+               }
+            }
+        }
+        return null;
+    }
 
     function __Check__(treeid,item, state, type,options){
         var pstate = item.checkstate;
@@ -419,7 +476,7 @@
         }
     }
 
-    function __reflash__(treeid,itemid,options){
+    function __Reflash__(treeid,itemid,options){
         var nid = itemid.replace(/[^\w-]/gi, "_");
         var node = $("#" + treeid + "_" + nid);
 
@@ -488,7 +545,7 @@
             else {
                 id = itemOrItemId.id;
             }
-            __reflash__(this.treeid,id,this.options);
+            __Reflash__(this.treeid,id,this.options);
         },
         CheckAll:function(){ //选中全部
             if (this.treedata != null && this.treedata.length > 0) {
@@ -526,6 +583,15 @@
         },
         GetTreeData:function(){ //获取所有数据
             return this.treedata;
+        },
+        LocateNode:function(nodeid){ //定位到某个节点
+            if(nodeid){
+                return __LocateNodeById__(this.treedata,this.treeid,nodeid,this.options);
+            }
+            else{
+                return false;
+            }
+            
         }
     };
     window.xjTree = xjTree;

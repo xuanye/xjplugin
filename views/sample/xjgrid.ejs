@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<%include ../header%>
+		<link rel="stylesheet" href="/css/plugin/xjgrid.css" media="screen" type="text/css"/>
+		<style type="text/css">	
+		</style>
+	</head>
+	</head>
+	<body>
+		<%include ../toper%>
+		<div class="container">
+			<h3>xjgrid数据表格控件</h3>
+		    <div>
+		      <div class="alert alert-info">		         
+		          如果你只想要一个带分页功能的gridview，其他复杂的功能一概不要，那么xjgrid绝对是适合的插件。<br/>
+                  <!--当然如果你是在找一个功能强大的表格插件，我觉得你可以试试flexgrid（官网，假正经哥哥的修改版）-->
+		      </div>
+		      <div class="codep"><code>&lt;link rel="stylesheet" href="css/plugin/xjgrid.css" type="text/css"&gt;</code></div>
+		      <div class="codep"><code>&lt;script src="js/plugin/xjgrid.js" type="text/javascript"&gt;&lt;/script&gt;</code></div>
+		    </div>		   
+            <h5>1. 带分页的数据表格</h5>
+            <div style="margin-top:10px;">
+                <div id="grid">
+            
+                </div> 
+            </div>
+		</div>
+		<%include ../bottomer%>
+		<script src="/js/plugin/xjgrid.js" type="text/javascript"></script>
+		<script type="text/javascript">		
+            var xjgrid = new xjGrid("grid",{
+                url:"/sample/queryproduct",//获取数据的url    
+                usepager:true,  
+                showcheckbox:true,    
+                colModel:[
+                    { display: '编码', name: 'ProductID', width: 60,  align: 'left',iskey:true },
+                    { display: '商品名称', name: 'ProductName', width: 150,  align: 'left' },
+                    { display: '规格', name: 'QuantityPerUnit', width: 200, align: 'left' },
+                    { display: '单价', name: 'UnitPrice', width: 80, process:formatmoney, align: 'right'},
+                    { display: '库存', name: 'UnitsInStock', width: 60, align: 'center' },
+                    { display: '已订购', name: 'UnitsOnOrder', width: 60, align: 'center' },
+                    { display: '操作', width: 150, align: 'center',process:formatop }
+                ] //列定义
+            });
+            function formatmoney(value,cell) {
+               return "$"+parseFloat(value).toFixed(2);
+            }
+            function formatop(value,cell){
+                return "<a href='javascript:void(0);'>编辑</a>";
+            }
+		</script>
+	</body>
+</html>
