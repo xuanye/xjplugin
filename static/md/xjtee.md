@@ -2,17 +2,18 @@ xjtree
 ====
 调用示例
 ---
-``` html
+```
 <div id="treeid"></div>
 ```
-``` javascript
+
+```
 var tree = new xjTree("treeid",option);
 ```
 其中treeid 为页面上div 的id,option为调用参数，详见参数说明
 参数说明
 ---
 ### 完整参数示例
-``` javascript
+``` 
 {
     method: "POST",
     datatype: "json",
@@ -159,9 +160,32 @@ var nodedata ={
 **返回值：** array()  
 返回[nodedata]
 
+#### 10. LocateNode:function(nodeid)
+> 定位到某个节点，如果节点已经生成，则从该节点的父节点展开至根节点
+
+**参数：**  
+1. nodeid : string 必选！
+需要定位的节点ID
+
+**返回值：**  void
+无
 
 事件
 ---
+#### 1. oncheckboxclick : function(item,state)
+> 当树节点中任意一个checkbox被点击时触发，该事件处理函数的返回值如果为false，则可以阻止check行为
+
+**参数说明：**  
+
+1. item : object
+`nodedata` 所在节点数据 
+
+2. state：0/1/2
+选中的状态 0 未为选中 1 选中  2 半选
+
+**返回值：** boolean  
+
+必须返回一个结果true/false 
 
 FAQ
 ---
