@@ -1,16 +1,21 @@
 {
   "name": "xjplugin",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "private": true,
   "scripts": {
     "start": "node app.js"
   },
   "dependencies": {
     "express": "3.4.0",
-    "ejs": "*"
-  }, 
+    "ejs": "*",
+    "marked": "~0.2.10"
+  },
   "engines": {
     "node": "0.10.x",
     "npm": "1.3.x"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-markdown": "~0.4.0"
   }
 }

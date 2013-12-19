@@ -2,18 +2,18 @@ xjtree
 ====
 调用示例
 ---
-```
+```html
 <div id="treeid"></div>
 ```
 
-```
+```javascript
 var tree = new xjTree("treeid",option);
 ```
 其中treeid 为页面上div 的id,option为调用参数，详见参数说明
 参数说明
 ---
 ### 完整参数示例
-``` 
+```javascript
 {
     method: "POST",
     datatype: "json",
@@ -32,7 +32,7 @@ var tree = new xjTree("treeid",option);
 }
 ```
 ### 参数说明
-<table>
+<table class="table">
 <thead><tr><th>参数名称</th><th>说明</th><th>备注</th></tr></thead>
 <tbody>
 <tr><td>method</td><td>异步请求的方式，默认为`POST`</td><td>没事就不要修改了</td></tr>
@@ -43,6 +43,7 @@ var tree = new xjTree("treeid",option);
 <tr><td>emptyiconpath</td><td>一张空白图片的地址</td><td>如果地址不同需要重新配置下</td></tr>
 <tr><td>showcheck</td><td>是否需要显示checkbox，默认为`false`</td><td></td></tr>
 <tr><td>data</td><td>默认加载的数据源</td><td>详见数据格式</td></tr>
+<tr><td>theme</td><td>主题样式，默认为`xj-tree-arrows`</td><td>其他主题可选 `xj-tree-line` `xj-tree-no-lines` `xj-tree-arrows-newico` </td></tr>
 <tr><td>cascadecheck</td><td>是否支持级联选中，默认为`true`</td><td></td></tr>
 <tr><td>oncheckboxclick</td><td>事件，当checkbox被点击以后触发</td><td>具体参考事件说明</td></tr>
 <tr><td>onnodeclick</td><td>事件，当节点被点击时触发</td><td>具体参考事件说明</td></tr>
@@ -57,11 +58,11 @@ var tree = new xjTree("treeid",option);
 因为树的数据具有层次性,我们将分两层将其分解
 
 首先顶层 是一个nodedata的数组
-```
+```javascript
 var treedata =[nodedata]
 ```
 其中`nodedata`，包含以下字段
-```
+```javascript
 var nodedata ={
     "id":"", //节点ID
     "text":"", //节点文本
@@ -187,7 +188,59 @@ var nodedata ={
 
 必须返回一个结果true/false 
 
+#### 2. onnodeclick:function(item)
+> 当树节点被点击时触发的事件
+
+**参数说明：** 
+
+1. item:object `nodedata`所在数据的节点 
+> 和初始化的`nodedata` 不同的时 这里的item 有一个`expand` 的方法 可以展开/收缩 节点
+
+**返回值：** void   
+无 ，不需要返回值  
+
+**示例：**  
+```javascript
+onnodeclick: function(node){node.expand();} 
+```
+#### 3. parsedata:function(data)  
+> 异步获取子节点中，数据返回成功后触发，只在有数据的时候触发，可用于重新格式化或过滤数据。
+
+**参数说明：**  
+
+1. data: array() , [nodedata] 子节点数据  
+
+**返回值：**  void  
+无
+
+#### 4. preloadcomplete:function()
+> 异步获取子节点中,请求返回后触发，此事件在`parsedata` 事件前 ，不管有没有数据，总是触发。一般不用设置，特殊需求时需要。
+
+**返回值：**  void  
+无
+
 FAQ
 ---
+1. 如果自定义节点的样式，如图标  
+ > 设置节点的 `classes` 属性，如下所示：  
+
+节点数据：  
+```javascript
+{
+    ...
+    "classes":"ico-home",
+    ...
+}
+```
+
+新增样式：  
+```css
+.ico-home .xj-tree-node-icon
+{
+	background-image: url("/img/icon/home.png");
+}
+```
+
 扩展
 ---
+xjtree 的页面dom和事件绑定分离，同时数据结构非常易于扩展。
