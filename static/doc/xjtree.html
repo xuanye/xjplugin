@@ -10,10 +10,6 @@
 	<!--[if lt IE 9]
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	-->
-	<script src="/js/highlight/highlight.pack.js" type="text/javascript"></script>
-	<script type="text/javascript">
-		hljs.initHighlightingOnLoad();
-	</script>
 	<style>
 		body {
 		 padding-top: 50px; /* 60px to make the container go all the way to the bottom of the topbar */
@@ -45,26 +41,26 @@
 		<div class="container">
 			<h1 id="xjtree">xjtree</h1>
 <h2 id="-">调用示例</h2>
-<pre><code class="lang-html">&lt;div id=&quot;treeid&quot;&gt;&lt;/div&gt;</code></pre>
-<pre><code class="lang-javascript">var tree = new xjTree(&quot;treeid&quot;,option);</code></pre>
+<pre><code class="lang-html"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"treeid"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre>
+<pre><code class="lang-javascript"><span class="keyword">var</span> tree = <span class="keyword">new</span> xjTree(<span class="string">"treeid"</span>,option);</code></pre>
 <p>其中treeid 为页面上div 的id,option为调用参数，详见参数说明</p>
 <h2 id="-">参数说明</h2>
 <h3 id="-">完整参数示例</h3>
 <pre><code class="lang-javascript">{
-    method: &quot;POST&quot;,
-    datatype: &quot;json&quot;,
-    url: false,
-    cbiconpath: &quot;/img/icon/&quot;,
-    icons: [&quot;checkbox_0.gif&quot;, &quot;checkbox_1.gif&quot;, &quot;checkbox_2.gif&quot;],
-    emptyiconpath: &quot;/img/icon/s.gif&quot;,
-    showcheck: false,   
-    oncheckboxclick: false,
-    onnodeclick: false,
-    parsedata: false,
-    cascadecheck: true,
-    data: null,
-    preloadcomplete: false,      
-    theme: &quot;xj-tree-arrows&quot;
+    method: <span class="string">"POST"</span>,
+    datatype: <span class="string">"json"</span>,
+    url: <span class="literal">false</span>,
+    cbiconpath: <span class="string">"/img/icon/"</span>,
+    icons: [<span class="string">"checkbox_0.gif"</span>, <span class="string">"checkbox_1.gif"</span>, <span class="string">"checkbox_2.gif"</span>],
+    emptyiconpath: <span class="string">"/img/icon/s.gif"</span>,
+    showcheck: <span class="literal">false</span>,   
+    oncheckboxclick: <span class="literal">false</span>,
+    onnodeclick: <span class="literal">false</span>,
+    parsedata: <span class="literal">false</span>,
+    cascadecheck: <span class="literal">true</span>,
+    data: <span class="literal">null</span>,
+    preloadcomplete: <span class="literal">false</span>,      
+    theme: <span class="string">"xj-tree-arrows"</span>
 }</code></pre>
 <h3 id="-">参数说明</h3>
 <table class="table">
@@ -91,17 +87,17 @@
 <p>不管是在初始化中<code>option</code>中的<code>data</code> 还是异步请求返回的数据,都使用同一种数据格式,这里把假定为<code>nodedata</code>.
 因为树的数据具有层次性,我们将分两层将其分解</p>
 <p>首先顶层 是一个nodedata的数组</p>
-<pre><code class="lang-javascript">var treedata =[nodedata]</code></pre>
+<pre><code class="lang-javascript"><span class="keyword">var</span> treedata =[nodedata]</code></pre>
 <p>其中<code>nodedata</code>，包含以下字段</p>
-<pre><code class="lang-javascript">var nodedata ={
-    &quot;id&quot;:&quot;&quot;, //节点ID
-    &quot;text&quot;:&quot;&quot;, //节点文本
-    &quot;value&quot;:&quot;&quot;// 节点的值
-    &quot;hasChildren&quot;:true, //是否包含子节点，因为ChildNodes的数据可能还没加载是否有下级由此属性控制
-    &quot;classes&quot;:&quot;&quot;, //自定义节点cssClass的名称
-    &quot;showcheck&quot;:false,//是否显示checkbox,和调用处的showcheck同时设置为true该节点才能显示checkbox
-    &quot;complete&quot;:false,//子节点是否已经加载完成
-    &quot;ChildNodes&quot;:[nodedata] //子节点数据
+<pre><code class="lang-javascript"><span class="keyword">var</span> nodedata ={
+    <span class="string">"id"</span>:<span class="string">""</span>, <span class="comment">//节点ID</span>
+    <span class="string">"text"</span>:<span class="string">""</span>, <span class="comment">//节点文本</span>
+    <span class="string">"value"</span>:<span class="string">""</span><span class="comment">// 节点的值</span>
+    <span class="string">"hasChildren"</span>:<span class="literal">true</span>, <span class="comment">//是否包含子节点，因为ChildNodes的数据可能还没加载是否有下级由此属性控制</span>
+    <span class="string">"classes"</span>:<span class="string">""</span>, <span class="comment">//自定义节点cssClass的名称</span>
+    <span class="string">"showcheck"</span>:<span class="literal">false</span>,<span class="comment">//是否显示checkbox,和调用处的showcheck同时设置为true该节点才能显示checkbox</span>
+    <span class="string">"complete"</span>:<span class="literal">false</span>,<span class="comment">//子节点是否已经加载完成</span>
+    <span class="string">"ChildNodes"</span>:[nodedata] <span class="comment">//子节点数据</span>
  }</code></pre>
 <p><strong>注意：</strong> 节点上还可以附加其他数据字段，不会被处理，并且会在方法中传递。</p>
 <h2 id="-">方法</h2>
@@ -216,7 +212,7 @@
 </ol>
 <p><strong>返回值：</strong> void<br>无 ，不需要返回值  </p>
 <p><strong>示例：</strong>  </p>
-<pre><code class="lang-javascript">onnodeclick: function(node){node.expand();}</code></pre>
+<pre><code class="lang-javascript">onnodeclick: <span class="keyword">function</span>(node){node.expand();}</code></pre>
 <h4 id="3-parsedata-function-data-">3. parsedata:function(data)</h4>
 <blockquote>
 <p>异步获取子节点中，数据返回成功后触发，只在有数据的时候触发，可用于重新格式化或过滤数据。</p>
@@ -241,14 +237,14 @@
 <p>节点数据：  </p>
 <pre><code class="lang-javascript">{
     ...
-    &quot;classes&quot;:&quot;ico-home&quot;,
+    <span class="string">"classes"</span>:<span class="string">"ico-home"</span>,
     ...
 }</code></pre>
 <p>新增样式：  </p>
-<pre><code class="lang-css">.ico-home .xj-tree-node-icon
-{
-    background-image: url(&quot;/img/icon/home.png&quot;);
-}</code></pre>
+<pre><code class="lang-css"><span class="class">.ico-home</span> <span class="class">.xj-tree-node-icon</span>
+<span class="rules">{
+    <span class="rule"><span class="attribute">background-image</span>:<span class="value"> <span class="function">url(<span class="string">"/img/icon/home.png"</span>)</span>;</span></span>
+<span class="rule">}</span></span></code></pre>
 <h2 id="-">扩展</h2>
 <p>xjtree 的页面dom和事件绑定分离，同时数据结构非常易于扩展。</p>
 
