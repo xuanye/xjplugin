@@ -43,7 +43,94 @@
 		</div>
 		<!-- /.nav-collapse-->
 		<div class="container">
-			
+			<h1 id="xjtabpanel">xjtabpanel</h1>
+<p>xjtabpanel 是一个简单的选项卡控件， 建议用于后台系统首页程序，具体可参考 <a href="sample/desktop">demo</a></p>
+<h2 id="-">调用示例</h2>
+<pre><code class="lang-html"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"tab-container"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre>
+<pre><code class="lang-javascript"><span class="keyword">var</span> tab = <span class="keyword">new</span> xjTabPanel(<span class="string">"tab-container"</span>,option);</code></pre>
+<p>其中<code>tab-container</code>为页面上div 的id,option为调用参数，详见参数说明</p>
+<h2 id="-">参数说明</h2>
+<table class="table">
+<thead><tr><th>参数名称</th><th>说明</th><th>备注</th></tr></thead>
+<tbody>
+<tr><td>items</td><td>数组，选项卡内容数据</td><td>具体请参考数据格式</td></tr>
+<tr><td>width</td><td>整形，设置插件的宽度，单位为像素</td><td>默认为<code>500</code></td></tr>
+<tr><td>height</td><td>整形，设置插件的高度，单位为像素</td><td>默认为<code>400</code></td></tr>
+
+<tr><td>showcloseall</td><td>数组，当item数量大于此数量时，显示关闭所有的按钮</td><td>默认为<code>5</code></td></tr>
+<tr><td>scrollwidth</td><td>整形，如果存在滚动条，点击按钮次每次滚动的距离,单位为像素</td><td>默认为<code>100</code></td></tr>
+<tr><td>autoscroll</td><td>布尔，当选项卡宽度大于容器时自动添加滚动按钮</td><td></td></tr>
+</tbody>
+</table>
+
+<h2 id="-">数据格式</h2>
+<p>items中的数据格式，本文假定为 <code>tabitem</code> .</p>
+<pre><code class="lang-json">{ 
+    id: &quot;&quot;,  //id，必须唯一
+    text: &quot;&quot;, // 选项卡上显示的文本
+    classes: &quot;&quot;, // 自定义样式cssClass
+    isactive: true,  //是否当前激活， 只应该存在一个激活的选项卡
+    disabled:false,// 是否禁用
+    url: &quot;&quot;, //选项卡内容页iframe的url地址，如果该属性为空，则调用cuscall 获取内容
+    cuscall:function(item,parent){}, // 自定义获取选项卡内容的方法，没有配置则调用content
+    content: &quot;&quot;, // 选项卡内容的默认内容
+    closeable:true, //是否有一个单独关闭该选项卡的按钮
+    onactive:function(item){} //当选项卡被激活时触发
+}</code></pre>
+<p>可以附加其他属性，该属性会在方法和时间中传递。
+其中  </p>
+<ol>
+<li><p>cuscall:function(item,parent){}   </p>
+<blockquote>
+<p>自定义获取选项卡内容，如通过ajax方法获取服务端的某些数据，该方法只会被触发一次！，其中<code>item</code> 为当前选项卡的数据，parent 为内容页父容器。需要填充的内容作为函数返回值即可。</p>
+</blockquote>
+</li>
+<li><p>onactive:function(item){}  </p>
+<blockquote>
+<p>当选项卡被激活时触发的事件，<code>item</code> 为当前选项卡的数据。 </p>
+</blockquote>
+</li>
+</ol>
+<h2 id="-">方法</h2>
+<p>所有方法都通过声明时的实例来调用 <code>var tab = new xjTabPanel(&quot;tabid&quot;,option);</code></p>
+<h4 id="1-addtabitem-function-item-">1.AddTabItem:function(item)</h4>
+<blockquote>
+<p>添加选项卡</p>
+</blockquote>
+<p><strong>参数:</strong> </p>
+<ol>
+<li>item :object ,tabitem 的一个实例</li>
+</ol>
+<p><strong>返回值：</strong> void<br>无</p>
+<h4 id="2-opentabitem-function-item-oradd-">2.OpenTabItem:function(item,orAdd)</h4>
+<blockquote>
+<p>激活某选项卡 ，如果oradd参数为真时，如果item.id 对应的选项卡并不存在 则新增一个新的选项卡 ，并激活。</p>
+</blockquote>
+<p><strong>参数:</strong>   </p>
+<ol>
+<li><p>item : object ,tabitem 的一个实例  </p>
+</li>
+<li><p>orAdd : boolean,当设置成<code>true</code> 时 ， </p>
+</li>
+</ol>
+<p><strong>返回值：</strong> void<br>无</p>
+<h4 id="3-resizetabpanel-function-width-height-">3. ResizeTabPanel:function(width,height)</h4>
+<blockquote>
+<p>重新设置tabpanel的大小 。width，height 都是整数，单位为像素</p>
+</blockquote>
+<h4 id="4-setdisabletabitem-function-itemid-disabled-">4.SetDisableTabItem:function(itemId, disabled)</h4>
+<blockquote>
+<p>设置选项卡的状态</p>
+</blockquote>
+<p><strong>参数：</strong>  </p>
+<ol>
+<li>itemId :string,选项卡的id  </li>
+<li>disabled:boolean,是否禁用</li>
+</ol>
+<p><strong>返回值：</strong> void<br>无 </p>
+<h2 id="faq">FAQ</h2>
+<p>无</p>
+
 		</div>		
 	</body>
 </html>
