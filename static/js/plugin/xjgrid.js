@@ -15,6 +15,7 @@
 			extparams: {},
 			gridClass: "xjgrid"//Style
 		}, options);
+		this.options = options ;
 		options.elid= id;
 		options.el = $("#"+id);
 		__Init__(options);
@@ -326,5 +327,34 @@
 		}
 		__LoadData__(options);
 	}
+	function __GetCheckedRowIds__(gridid){
+		var ids = [];
+		$("#"+gridid+"_detail td.checktd input[type='checkbox']").each(function(i){
+				this.checked  && ids.push(this.value);
+		});
+	}
+	xjGrid.prototype = {
+		Reload :function () {
+			// body...
+			__LoadData__(this.options)
+		},
+		SetOptions:function(p) {
+			// body...
+	        $.extend(this.options, p);
+		},
+		GetCheckedRowIds:function(){
+			return __GetCheckedRowIds__(this.options.elid);
+		},
+		GetCheckedRowDatas:function(argument) {
+			var ids = __GetCheckedRowIds__(this.options.elid);
+			var datas = [];
+			for(var i=0,l = ids.length - 1; i<l; i++) {
+			   this.options.data[ids[i]]	&& datas.push(this.options.data[ids[i]]);
+			};
+			return datas;
+		}
+
+	}
+
 	window.xjGrid = xjGrid ;
 })(window,undefined,jQuery);
