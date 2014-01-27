@@ -43,93 +43,214 @@
 		</div>
 		<!-- /.nav-collapse-->
 		<div class="container">
-			<h1 id="xjtabpanel">xjtabpanel</h1>
-<p>xjtabpanel 是一个简单的选项卡控件， 建议用于后台系统首页程序，具体可参考 <a href="sample/desktop">demo</a></p>
+			<h1 id="xjtree">xjtree</h1>
 <h2 id="-">调用示例</h2>
-<pre><code class="lang-html"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"tab-container"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre>
-<pre><code class="lang-javascript"><span class="keyword">var</span> tab = <span class="keyword">new</span> xjTabPanel(<span class="string">"tab-container"</span>,option);</code></pre>
-<p>其中<code>tab-container</code>为页面上div 的id,option为调用参数，详见参数说明</p>
+<pre><code class="lang-html"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"treeid"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre>
+<pre><code class="lang-javascript"><span class="keyword">var</span> tree = <span class="keyword">new</span> xjTree(<span class="string">"treeid"</span>,option);</code></pre>
+<p>其中treeid 为页面上div 的id,option为调用参数，详见参数说明</p>
 <h2 id="-">参数说明</h2>
+<h3 id="-">完整参数示例</h3>
+<pre><code class="lang-javascript">{
+    method: <span class="string">"POST"</span>,
+    datatype: <span class="string">"json"</span>,
+    url: <span class="literal">false</span>,
+    cbiconpath: <span class="string">"/img/icon/"</span>,
+    icons: [<span class="string">"checkbox_0.gif"</span>, <span class="string">"checkbox_1.gif"</span>, <span class="string">"checkbox_2.gif"</span>],
+    emptyiconpath: <span class="string">"/img/icon/s.gif"</span>,
+    showcheck: <span class="literal">false</span>,   
+    oncheckboxclick: <span class="literal">false</span>,
+    onnodeclick: <span class="literal">false</span>,
+    parsedata: <span class="literal">false</span>,
+    cascadecheck: <span class="literal">true</span>,
+    data: <span class="literal">null</span>,
+    preloadcomplete: <span class="literal">false</span>,      
+    theme: <span class="string">"xj-tree-arrows"</span>
+}</code></pre>
+<h3 id="-">参数说明</h3>
 <table class="table">
 <thead><tr><th>参数名称</th><th>说明</th><th>备注</th></tr></thead>
 <tbody>
-<tr><td>items</td><td>数组，选项卡内容数据</td><td>具体请参考数据格式</td></tr>
-<tr><td>width</td><td>整形，设置插件的宽度，单位为像素</td><td>默认为<code>500</code></td></tr>
-<tr><td>height</td><td>整形，设置插件的高度，单位为像素</td><td>默认为<code>400</code></td></tr>
-
-<tr><td>showcloseall</td><td>数组，当item数量大于此数量时，显示关闭所有的按钮</td><td>默认为<code>5</code></td></tr>
-<tr><td>scrollwidth</td><td>整形，如果存在滚动条，点击按钮次每次滚动的距离,单位为像素</td><td>默认为<code>100</code></td></tr>
-<tr><td>autoscroll</td><td>布尔，当选项卡宽度大于容器时自动添加滚动按钮</td><td></td></tr>
+<tr><td>method</td><td>异步请求的方式，默认为<code>POST</code></td><td>没事就不要修改了</td></tr>
+<tr><td>datatype</td><td>异步请求的数据格式，默认为<code>json</code></td><td>其他格式暂不支持</td></tr>
+<tr><td>url</td><td>异步请求的URL地址，如果需要异步获取数据这个字段必须填写</td><td></td></tr>
+<tr><td>cbiconpath</td><td>checkbox图片的相对路径，配合icons 组成tree选中框的三态</td><td>如果相对路径不同则需改此字段</td></tr>
+<tr><td>icons</td><td>checkbox三态的图片名称</td><td></td></tr>
+<tr><td>emptyiconpath</td><td>一张空白图片的地址</td><td>如果地址不同需要重新配置下</td></tr>
+<tr><td>showcheck</td><td>是否需要显示checkbox，默认为<code>false</code></td><td></td></tr>
+<tr><td>data</td><td>默认加载的数据源</td><td>详见数据格式</td></tr>
+<tr><td>theme</td><td>主题样式，默认为<code>xj-tree-arrows</code></td><td>其他主题可选 <code>xj-tree-line</code> <code>xj-tree-no-lines</code> <code>xj-tree-arrows-newico</code> </td></tr>
+<tr><td>cascadecheck</td><td>是否支持级联选中，默认为<code>true</code></td><td></td></tr>
+<tr><td>oncheckboxclick</td><td>事件，当checkbox被点击以后触发</td><td>具体参考事件说明</td></tr>
+<tr><td>onnodeclick</td><td>事件，当节点被点击时触发</td><td>具体参考事件说明</td></tr>
+<tr><td>parsedata</td><td>事件，异步获取数据返回后触发，一般用于重新处理数据格式</td><td>具体参考事件说明</td></tr>
+<tr><td>preloadcomplete</td><td>事件，异步请求返回后触发</td><td>具体参考事件说明</td></tr>
 </tbody>
 </table>
 
 <h2 id="-">数据格式</h2>
-<p>items中的数据格式，本文假定为 <code>tabitem</code> .</p>
-<pre><code class="lang-json">{ 
-    id: &quot;&quot;,  //id，必须唯一
-    text: &quot;&quot;, // 选项卡上显示的文本
-    classes: &quot;&quot;, // 自定义样式cssClass
-    isactive: true,  //是否当前激活， 只应该存在一个激活的选项卡
-    disabled:false,// 是否禁用
-    url: &quot;&quot;, //选项卡内容页iframe的url地址，如果该属性为空，则调用cuscall 获取内容
-    cuscall:function(item,parent){}, // 自定义获取选项卡内容的方法，没有配置则调用content
-    content: &quot;&quot;, // 选项卡内容的默认内容
-    closeable:true, //是否有一个单独关闭该选项卡的按钮
-    onactive:function(item){} //当选项卡被激活时触发
-}</code></pre>
-<p>可以附加其他属性，该属性会在方法和时间中传递。
-其中  </p>
-<ol>
-<li><p>cuscall:function(item,parent){}   </p>
-<blockquote>
-<p>自定义获取选项卡内容，如通过ajax方法获取服务端的某些数据，该方法只会被触发一次！，其中<code>item</code> 为当前选项卡的数据，parent 为内容页父容器。需要填充的内容作为函数返回值即可。</p>
-</blockquote>
-</li>
-<li><p>onactive:function(item){}  </p>
-<blockquote>
-<p>当选项卡被激活时触发的事件，<code>item</code> 为当前选项卡的数据。 </p>
-</blockquote>
-</li>
-</ol>
+<p>不管是在初始化中<code>option</code>中的<code>data</code> 还是异步请求返回的数据,都使用同一种数据格式,这里把假定为<code>nodedata</code>.
+因为树的数据具有层次性,我们将分两层将其分解</p>
+<p>首先顶层 是一个nodedata的数组</p>
+<pre><code class="lang-javascript"><span class="keyword">var</span> treedata =[nodedata]</code></pre>
+<p>其中<code>nodedata</code>，包含以下字段</p>
+<pre><code class="lang-javascript"><span class="keyword">var</span> nodedata ={
+    <span class="string">"id"</span>:<span class="string">""</span>, <span class="comment">//节点ID</span>
+    <span class="string">"text"</span>:<span class="string">""</span>, <span class="comment">//节点文本</span>
+    <span class="string">"value"</span>:<span class="string">""</span><span class="comment">// 节点的值</span>
+    <span class="string">"hasChildren"</span>:<span class="literal">true</span>, <span class="comment">//是否包含子节点，因为ChildNodes的数据可能还没加载是否有下级由此属性控制</span>
+    <span class="string">"classes"</span>:<span class="string">""</span>, <span class="comment">//自定义节点cssClass的名称</span>
+    <span class="string">"showcheck"</span>:<span class="literal">false</span>,<span class="comment">//是否显示checkbox,和调用处的showcheck同时设置为true该节点才能显示checkbox</span>
+    <span class="string">"complete"</span>:<span class="literal">false</span>,<span class="comment">//子节点是否已经加载完成</span>
+    <span class="string">"ChildNodes"</span>:[nodedata] <span class="comment">//子节点数据</span>
+ }</code></pre>
+<p><strong>注意：</strong> 节点上还可以附加其他数据字段，不会被处理，并且会在方法中传递。</p>
 <h2 id="-">方法</h2>
-<p>所有方法都通过声明时的实例来调用 <code>var tab = new xjTabPanel(&quot;tabid&quot;,option);</code></p>
-<h4 id="1-addtabitem-function-item-">1.AddTabItem:function(item)</h4>
+<p>所有方法都通过声明时的实例来调用 <code>var tree = new xjTree(&quot;treeid&quot;,option);</code></p>
+<h4 id="1-getcheckeditems-function-gethalfchecknode-">1. GetCheckedItems:function(gethalfchecknode)</h4>
 <blockquote>
-<p>添加选项卡</p>
-</blockquote>
-<p><strong>参数:</strong> </p>
-<ol>
-<li>item :object ,tabitem 的一个实例</li>
-</ol>
-<p><strong>返回值：</strong> void<br>无</p>
-<h4 id="2-opentabitem-function-item-oradd-">2.OpenTabItem:function(item,orAdd)</h4>
-<blockquote>
-<p>激活某选项卡 ，如果oradd参数为真时，如果item.id 对应的选项卡并不存在 则新增一个新的选项卡 ，并激活。</p>
-</blockquote>
-<p><strong>参数:</strong>   </p>
-<ol>
-<li><p>item : object ,tabitem 的一个实例  </p>
-</li>
-<li><p>orAdd : boolean,当设置成<code>true</code> 时 ， </p>
-</li>
-</ol>
-<p><strong>返回值：</strong> void<br>无</p>
-<h4 id="3-resizetabpanel-function-width-height-">3. ResizeTabPanel:function(width,height)</h4>
-<blockquote>
-<p>重新设置tabpanel的大小 。width，height 都是整数，单位为像素</p>
-</blockquote>
-<h4 id="4-setdisabletabitem-function-itemid-disabled-">4.SetDisableTabItem:function(itemId, disabled)</h4>
-<blockquote>
-<p>设置选项卡的状态</p>
+<p>获取选中的节点数据项集合</p>
 </blockquote>
 <p><strong>参数：</strong>  </p>
 <ol>
-<li>itemId :string,选项卡的id  </li>
-<li>disabled:boolean,是否禁用</li>
+<li>gethalfchecknode：boolean<br>是否获取半选中状态的节点</li>
 </ol>
-<p><strong>返回值：</strong> void<br>无 </p>
+<p><strong>返回值：</strong>  array  </p>
+<p>返回 <code>[nodedata]</code> 数组</p>
+<h4 id="2-getcheckedvalues-function-gethalfchecknode-">2. GetCheckedValues:function(gethalfchecknode)</h4>
+<blockquote>
+<p>获取选中的节点的value值集合  </p>
+</blockquote>
+<p><strong>参数：</strong>  </p>
+<ol>
+<li>gethalfchecknode：boolean<br>是否获取半选中状态的节点</li>
+</ol>
+<p><strong>返回值：</strong> array   </p>
+<p>返回 [nodedata.value] 数组</p>
+<h4 id="3-getcurrentitem-function-">3. GetCurrentItem:function()</h4>
+<blockquote>
+<p>获取当前节点</p>
+</blockquote>
+<p><strong>返回值：</strong>  object<br>返回当前节点 nodedata </p>
+<h4 id="4-refresh-function-itemoritemid-">4. Refresh:function(itemOrItemId)</h4>
+<blockquote>
+<p>刷新某节点</p>
+</blockquote>
+<p><strong>参数：</strong></p>
+<ol>
+<li>itemOrItemId:string/object 必选！<br>需要刷新的节点ID或者nodedata ，其实只要id就够了，</li>
+</ol>
+<p><strong>返回值：</strong> void<br>无</p>
+<h4 id="5-checkall-function-">5. CheckAll:function()</h4>
+<blockquote>
+<p>选中全部节点</p>
+</blockquote>
+<p><strong>返回值：</strong> void<br>无</p>
+<h4 id="6-uncheckall-function-">6. UnCheckAll:function()</h4>
+<blockquote>
+<p>取消全部选中的节点</p>
+</blockquote>
+<p><strong>返回值：</strong> void<br>无</p>
+<h4 id="7-setitemscheckstate-function-itemids-ischecked-cascadecheck-">7. SetItemsCheckState:function(itemIds, ischecked, cascadecheck)</h4>
+<blockquote>
+<p>设置多个节点的选中状态 </p>
+</blockquote>
+<p><strong>参数：</strong>  </p>
+<ol>
+<li>itemIds：array()  必选！<br> 需要设置节点IDs:[id1,id2]  </li>
+<li>ischecked：boolean   必选！<br> 是否选中true/false  </li>
+<li>cascadecheck：boolean   必选！<br> 是否级联效果true/false</li>
+</ol>
+<p><strong>返回值：</strong> void
+无</p>
+<h4 id="8-togglenode-function-itemid-">8. ToggleNode:function(itemId)</h4>
+<blockquote>
+<p>切换节点收缩/展开状态</p>
+</blockquote>
+<p><strong>参数：</strong>  </p>
+<ol>
+<li>itemId : string  必选！<br>需要切换的节点ID</li>
+</ol>
+<p><strong>返回值：</strong> void<br>无</p>
+<h4 id="9-gettreedata-function-">9. GetTreeData:function()</h4>
+<blockquote>
+<p>获取树中的元素数据</p>
+</blockquote>
+<p><strong>返回值：</strong> array()<br>返回[nodedata]</p>
+<h4 id="10-locatenode-function-nodeid-">10. LocateNode:function(nodeid)</h4>
+<blockquote>
+<p>定位到某个节点，如果节点已经生成，则从该节点的父节点展开至根节点</p>
+</blockquote>
+<p><strong>参数：</strong>  </p>
+<ol>
+<li>nodeid : string 必选！
+需要定位的节点ID</li>
+</ol>
+<p><strong>返回值：</strong>  void
+无</p>
+<h2 id="-">事件</h2>
+<h4 id="1-oncheckboxclick-function-item-state-">1. oncheckboxclick : function(item,state)</h4>
+<blockquote>
+<p>当树节点中任意一个checkbox被点击时触发，该事件处理函数的返回值如果为false，则可以阻止check行为</p>
+</blockquote>
+<p><strong>参数说明：</strong>  </p>
+<ol>
+<li><p>item : object
+<code>nodedata</code> 所在节点数据 </p>
+</li>
+<li><p>state：0/1/2
+选中的状态 0 未为选中 1 选中  2 半选</p>
+</li>
+</ol>
+<p><strong>返回值：</strong> boolean  </p>
+<p>必须返回一个结果true/false </p>
+<h4 id="2-onnodeclick-function-item-">2. onnodeclick:function(item)</h4>
+<blockquote>
+<p>当树节点被点击时触发的事件</p>
+</blockquote>
+<p><strong>参数说明：</strong> </p>
+<ol>
+<li>item:object <code>nodedata</code>所在数据的节点 <blockquote>
+<p>和初始化的<code>nodedata</code> 不同的时 这里的item 有一个<code>expand</code> 的方法 可以展开/收缩 节点</p>
+</blockquote>
+</li>
+</ol>
+<p><strong>返回值：</strong> void<br>无 ，不需要返回值  </p>
+<p><strong>示例：</strong>  </p>
+<pre><code class="lang-javascript">onnodeclick: <span class="keyword">function</span>(node){node.expand();}</code></pre>
+<h4 id="3-parsedata-function-data-">3. parsedata:function(data)</h4>
+<blockquote>
+<p>异步获取子节点中，数据返回成功后触发，只在有数据的时候触发，可用于重新格式化或过滤数据。</p>
+</blockquote>
+<p><strong>参数说明：</strong>  </p>
+<ol>
+<li>data: array() , [nodedata] 子节点数据  </li>
+</ol>
+<p><strong>返回值：</strong>  void<br>无</p>
+<h4 id="4-preloadcomplete-function-">4. preloadcomplete:function()</h4>
+<blockquote>
+<p>异步获取子节点中,请求返回后触发，此事件在<code>parsedata</code> 事件前 ，不管有没有数据，总是触发。一般不用设置，特殊需求时需要。</p>
+</blockquote>
+<p><strong>返回值：</strong>  void<br>无</p>
 <h2 id="faq">FAQ</h2>
-<p>无</p>
+<ol>
+<li>如果自定义节点的样式，如图标  <blockquote>
+<p>设置节点的 <code>classes</code> 属性，如下所示：  </p>
+</blockquote>
+</li>
+</ol>
+<p>节点数据：  </p>
+<pre><code class="lang-javascript">{
+    ...
+    <span class="string">"classes"</span>:<span class="string">"ico-home"</span>,
+    ...
+}</code></pre>
+<p>新增样式：  </p>
+<pre><code class="lang-css"><span class="class">.ico-home</span> <span class="class">.xj-tree-node-icon</span>
+<span class="rules">{
+    <span class="rule"><span class="attribute">background-image</span>:<span class="value"> <span class="function">url(<span class="string">"/img/icon/home.png"</span>)</span>;</span></span>
+<span class="rule">}</span></span></code></pre>
+<h2 id="-">扩展</h2>
+<p>xjtree 的页面dom和事件绑定分离，同时数据结构非常易于扩展。</p>
 
 		</div>		
 	</body>
