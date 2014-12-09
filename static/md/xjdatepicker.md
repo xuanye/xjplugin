@@ -30,6 +30,7 @@ dptext1 为页面上input的id,option为调用参数，详见参数说明
 	picker: ""
 }
 ```
+
 ### 参数说明
 <table class="table">
 <thead><tr><th>参数名称</th><th>说明</th><th>备注</th></tr></thead>

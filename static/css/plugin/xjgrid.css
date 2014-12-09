@@ -1,18 +1,21 @@
 .xjgrid
 {
-
+    clear:both;
+    font-size:12px;
 }
 .xjgrid .grid-body{
  	padding: 0; 
     margin: 0; 
 }
-.xjgrid .grid-header table,.xjgrid .grid-body table
+
+.xjgrid .grid-body table
 {
 	padding: 0; 
     margin: 0; 
     border-left: 1px solid #ddd;  /**/
+     table-layout: fixed;
 }
-.xjgrid .grid-header table td{ 
+.xjgrid .grid-body table tr.thead td{ 
     color: #555; 
     border:none;
     border-right: 1px solid #ddd; 
@@ -23,13 +26,20 @@
     background: #F2F2F2;
     font-weight: normal;
     font-size: 12px;
+ 
 }
-.xjgrid .grid-header table td div{
-	padding: 4px 4px; 
-	letter-spacing: 2px; 
-    overflow: hidden;
-    height: 20px;
-    line-height: 20px;  
+.xjgrid .grid-body table tr.thead td.checktd{
+    width:35px;
+}
+.xjgrid  .grid-body table tr.thead td div {
+    padding: 4px 4px;
+    letter-spacing: 2px;
+    overflow: hidden;  
+    line-height: 20px;
+    -ms-word-break: break-all;
+    word-break: break-all;
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
 }
 
 .xjgrid .grid-body table td { 
@@ -40,13 +50,18 @@
     padding: 0; 
     font-weight: normal;
     font-size: 12px;
-} 
-.xjgrid .grid-body table tr td div{	
-    padding: 3px 4px; 
-    height: 20px;
-    line-height: 20px;  
-    color: #555; 
-    overflow: hidden;
+  
+}
+.xjgrid .grid-body table tr td div {
+    padding: 3px 4px;
+    /*height: 20px;*/
+    line-height: 20px;
+    color: #555;
+    -ms-word-break: break-all;
+    word-break: break-all;
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
+    /*overflow: hidden;*/
 }
 .xjgrid .grid-body table tr.strip td{ 
     background: #FBFCFC; 
@@ -56,25 +71,35 @@
     background: #FFFFBB; 
     color: #797268; 
 } 
-
+.xjgrid .xjgrid-load{
+    position:absolute;  
+    top:50%;
+    left:50%;
+    margin-left: -20px;   
+    display:none;/**/
+    z-index:998;
+    background-color:#b22727;
+    color:#fff;
+    padding:4px 8px;   
+}
 
 .xjgrid .grid-pagination {
-  margin: 10px 0;
+  margin: 5px 0;
  }
  .xjgrid .grid-pagination ul {
     display: inline-block;
     list-style:none;
     *display: inline;
     /* IE7 inline-block hack */
-    *zoom: 1;
-    margin-left: 0;
-    margin-bottom: 0;
+    *zoom: 1;   
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
     -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    padding:0px;
+    margin:0px;
  }
  .xjgrid .grid-pagination ul > li {
     display: inline;

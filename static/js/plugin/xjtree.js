@@ -64,7 +64,7 @@
                 options.preloadcomplete && options.preloadcomplete();
                 if (data && data.length > 0) {
                     options.parsedata && options.parsedata(data);                       
-                    options.treedata = data;
+                    options.data = data;
                     var l = data.length;
                     for (var i = 0; i < l; i++) {
                         __BuildNode__(treeid,data[i], ht, 0, i, i == l - 1,options);
