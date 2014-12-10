@@ -119,20 +119,21 @@ gridid 为页面上div的id,option为调用参数，详见参数说明
 **返回值：** void    
 无
 
-#### 2. rowprocess : function(id,value,cells)
+#### 2. rowprocess : function(value,cells,id)
 > 格式化单元格输出
 
 **参数说明：**  
 
-1. id : String  
-当前行的主键值
 
-2. value : String  
+
+1. value : String  
 当前单元格的值
 
-3. cells : Array  
+2. cells : Array  
 当前行的所有数据值
 
+3. id : String  
+当前行的主键值
 
 **返回值：** String    
 返回格式化后的内容
@@ -143,7 +144,7 @@ gridid 为页面上div的id,option为调用参数，详见参数说明
 process:fomartMoney
 
 
-function fomartMoney(id,value){
+function fomartMoney(value){
 	return '$'+value;
 }
 ```
